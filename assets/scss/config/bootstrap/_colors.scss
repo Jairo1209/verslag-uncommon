@@ -7,7 +7,12 @@ $colors: (
   // pink: #f9e8d5,
   black: var(--color-black),
   white: var(--color-white),
-  red: #ff4848,
+  darkblue: #002024,
+  blue: #a8dadc,
+  darksand: #cb997e,
+  sand: #e7dfc6,
+  darkgreen: #1b251d,
+  green: #a5a58d,
   // lightgray: #ceceee,
   // gray: #d8d8d8,
 );
@@ -17,18 +22,18 @@ $theme-colors: (
   // secondary: color(coal),
   // secondary-100: lighten(color(coal), 2%),
   // tertiary: color(pink),
-  danger: color(red),
   dark: var(--color-black),
-  light: var(--color-white)
+  light: var(--color-white),
+  ocean: color(darkblue),
+  ocean-100: color(blue),
+  desert: color(sand),
+  desert-100: color(darksand),
+  forest: color(darkgreen),
+  forest-100: color(green),
 );
 
-$grays: (
-  // Overwrite these grays from 100-900,
-  // or add your own gray keys.
-  300: darken($white, 10%),
-  400: darken($white, 40%),
-  500: darken($white, 50%),
-  600: darken($white, 60%),
-  700: darken($white, 70%),
-  800: darken($white, 80%)
-);
+// $grays: (
+//   // Overwrite these grays from 100-900,
+//   // or add your own gray keys.
+//
+// );
