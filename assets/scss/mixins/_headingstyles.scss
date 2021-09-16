@@ -1,0 +1,14 @@
+@mixin headingstyles() {
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight;
+  letter-spacing: $headings-letter-spacing;
+
+  // .wf-loading & {
+  //   visibility: hidden;
+  // }
+  //
+  // .wf-geograph-n4-active &,
+  // .wf-geograph-n4-inactive & {
+  //   visibility: visible;
+  // }
+}

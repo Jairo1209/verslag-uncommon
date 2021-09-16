@@ -1,0 +1,3 @@
+@function transition($key) {
+  @return get-value-if-key-exists($map-transitions, $key);
+}

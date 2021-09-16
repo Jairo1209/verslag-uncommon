@@ -1,0 +1,56 @@
+// Base
+
+$default-font-size: 16px;
+$rfs-minimum-font-size: rem($default-font-size); // always use rem unit
+$rfs-base-font-size: rem($default-font-size); // always use rem unit
+$transition-base: all .15s ease-in-out;
+$font-size-base: strip-units(20px); // overwrites default bootstrap variable with stripped font-size
+$line-height-base: 1.65;
+
+// Body
+
+$body-bg: theme-color(light);
+$body-color: theme-color(dark);
+$body-letter-spacing: .01em;
+$text-muted: rgba($body-color, .6);
+
+// Links
+
+$link-color: theme-color(dark);
+$link-decoration: none;
+$link-hover-color: $link-color;
+$link-hover-decoration: underline;
+
+// Default font stack (used on <body>)
+$font-family-sans-serif: 'Untitled Sans', helvetica, arial, sans-serif;
+
+// Headings
+$headings-margin-bottom: .5em;
+$headings-font-family: 'europa', helvetica, arial, sans-serif;
+$headings-font-weight: 700;
+$headings-line-height: 1;
+$headings-letter-spacing: 0;
+$headings-text-transform: lowercase;
+$headings-color: theme-color(dark);
+
+// Container
+
+$container-max-widths: (
+  xl: 1400px,
+);
+
+// Spacing
+
+$spacer: 1rem;
+$spacers: (
+  5: ($spacer * 2)
+);
+
+// Form
+
+$placeholder-font-family: $font-family-sans-serif;
+$placeholder-color: rgba(theme-color(light), .7);
+
+// Printing
+
+$print-page-size: a4;

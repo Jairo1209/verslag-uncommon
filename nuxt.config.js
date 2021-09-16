@@ -15,13 +15,14 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: '/fonts/fonts.css' }
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    // '~/assets/scss/main.scss'
+    '~/assets/scss/main.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -36,8 +37,21 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/stylelint
-    '@nuxtjs/stylelint-module'
+    '@nuxtjs/stylelint-module',
+
+    // style resources
+    '@nuxtjs/style-resources'
   ],
+
+  styleResources: {
+    scss: [
+      '~assets/scss/functions/*.scss',
+      '~assets/scss/mixins/*.scss',
+      '~assets/scss/_config.scss',
+      '~assets/scss/placeholders/*.scss',
+      '~assets/scss/bootstrap/_variables.scss'
+    ]
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [

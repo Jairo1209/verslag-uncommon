@@ -1,0 +1,34 @@
+$white: #fff;
+$black: #000;
+
+$colors: (
+  // blue: #1f2ef5,
+  // coal: #0b1116,
+  // pink: #f9e8d5,
+  black: var(--color-black),
+  white: var(--color-white),
+  red: #ff4848,
+  // lightgray: #ceceee,
+  // gray: #d8d8d8,
+);
+
+$theme-colors: (
+  // primary: color(blue),
+  // secondary: color(coal),
+  // secondary-100: lighten(color(coal), 2%),
+  // tertiary: color(pink),
+  danger: color(red),
+  dark: var(--color-black),
+  light: var(--color-white)
+);
+
+$grays: (
+  // Overwrite these grays from 100-900,
+  // or add your own gray keys.
+  300: darken($white, 10%),
+  400: darken($white, 40%),
+  500: darken($white, 50%),
+  600: darken($white, 60%),
+  700: darken($white, 70%),
+  800: darken($white, 80%)
+);

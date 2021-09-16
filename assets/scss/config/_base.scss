@@ -1,0 +1,26 @@
+// Native css vars
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+}
+
+// Custom base config
+
+$img-path: '~@/assets/img/'; // background-image: img-path('image.jpg');
+$section-max-value: 100; // this will result in a max margin/padding of 100 pixels;
+$button-font-family: $headings-font-family;
+
+// Transitions
+$map-transitions: (
+  out: cubic-bezier(.22, .61, .36, 1)
+);
+
+// Global z-indexes
+$z-index: (
+  header: 999,
+  menu: 998,
+  cookie-notice: 1200,
+  modal: 1000,
+  cursor: 9999,
+  footer: -50
+);

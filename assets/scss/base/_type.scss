@@ -1,0 +1,36 @@
+// Headings
+
+@include headings {
+  @include headingstyles;
+
+  line-height: $headings-line-height;
+  color: $headings-color;
+  text-transform: $headings-text-transform;
+}
+
+@for $i from 1 through 6 {
+  .h#{$i},
+  h#{$i} {
+    @include get-font-size(#{h#{$i}});
+  }
+}
+
+// p {
+//   visibility: hidden;
+//
+//   .wf-active & {
+//     visibility: visible;
+//   }
+// }
+
+// Emphasis
+small,
+.text-small {
+  @include get-font-size(text-small);
+
+  font-weight: $font-weight-normal;
+}
+
+.large-text {
+  @include get-font-size(body-large);
+}
