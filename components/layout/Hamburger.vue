@@ -43,7 +43,7 @@ $hamburger-width: rem(40px);
     top: 50%;
     width: $hamburger-width;
     height: rem(2px);
-    background-color: theme-color(light);
+    background-color: white;
     transition: transform 300ms transition(outquint), background-color 300ms transition(outquint);
 
     &:nth-of-type(1) {

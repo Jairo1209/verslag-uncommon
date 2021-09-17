@@ -1,7 +1,6 @@
 <template>
   <div>
     <LayoutHeader />
-
     <main>
       <Nuxt />
     </main>

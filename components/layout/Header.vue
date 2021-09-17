@@ -2,7 +2,9 @@
   <header class="header" :class="{ 'has-another-color' : changeMenuColor }">
     <div class="header__bar">
       <div class="header__logo" @click.prevent="onClick">
-        {{ logoText }}
+        <NuxtLink class="logo" to="/">
+          {{ logoText }}
+        </NuxtLink>
       </div>
       <hamburger @click.native="onClick" />
     </div>
@@ -23,7 +25,7 @@ export default {
   data () {
     return {
       changeMenuColor: false,
-      logoText: 'logo-text'
+      logoText: 'JN'
     }
   },
 
@@ -44,22 +46,25 @@ export default {
   width: 100%;
 
   &__bar {
+    position: relative;
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     height: rem(60px);
     padding: 0 rem(30px);
-    background: gray;
-  }
-
-  &.has-another-color {
-    background: pink;
   }
 
   &__logo {
     z-index: 999;
+    font-size: rem(40px);
     color: white;
+  }
+
+  .logo {
+    color: white;
+    cursor: pointer;
   }
 }
 </style>

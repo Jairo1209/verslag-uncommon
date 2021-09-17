@@ -1,7 +1,7 @@
 <template>
-  <div class="section-inset-y">
+  <div class="homepage-wrap">
     <div class="container">
-      <h1>Test</h1>
+      <!--  -->
     </div>
   </div>
 </template>
@@ -16,5 +16,6 @@ export default {
 .homepage-wrap {
   width: 100%;
   height: 100vh;
+  background-color: #002024;
 }
 </style>
