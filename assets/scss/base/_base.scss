@@ -1,13 +1,6 @@
-html {
-  min-height: 100%;
-}
-
 html,
-body,
-#__layout {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
+body {
+  height: 100%;
 }
 
 body {
