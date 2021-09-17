@@ -6,5 +6,10 @@
 
 <script>
 export default {
+  head: {
+    bodyAttrs: {
+      class: 'theme-forest'
+    }
+  }
 }
 </script>

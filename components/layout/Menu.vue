@@ -8,16 +8,19 @@
         <li>
           <NuxtLink class="nav-link" to="/forest">
             Forest
+            <span />
           </NuxtLink>
         </li>
         <li>
           <NuxtLink class="nav-link" to="/ocean">
             Ocean
+            <span />
           </NuxtLink>
         </li>
         <li>
           <NuxtLink class="nav-link" to="/desert">
             Desert
+            <span />
           </NuxtLink>
         </li>
       </ul>
@@ -63,8 +66,8 @@ export default {
       },
       {
         opacity: 1,
-        duration: 1,
-        stagger: 0.1,
+        duration: 1.2,
+        stagger: 0.2,
         paused: true
       })
   },
@@ -94,6 +97,18 @@ export default {
   opacity: 0;
   transition: all 500ms transition(out);
 
+  body.theme-forest & {
+    background: theme-color(forest);
+  }
+
+  body.theme-desert & {
+    background: theme-color(desert);
+  }
+
+  body.theme-ocean & {
+    background: theme-color(ocean);
+  }
+
   &.is-open {
     visibility: visible;
     opacity: 1;
@@ -117,11 +132,13 @@ nav {
   }
 
   li {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: calc(100vh / 6);
+    height: calc(100% / 6);
+    min-height: 100px;
     font-family: 'Kaisei Tokumin', serif;
     font-size: rem(50px);
     font-style: normal;
@@ -129,8 +146,25 @@ nav {
   }
 }
 
+span {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  max-width: 180px;
+  height: 2px;
+  background-color: white;
+  opacity: 0;
+}
+
 .nav-link {
+  position: relative;
+  display: block;
   color: white;
   cursor: pointer;
+
+  &.nuxt-link-active span {
+    opacity: 1;
+  }
 }
 </style>
