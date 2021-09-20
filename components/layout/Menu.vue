@@ -5,23 +5,25 @@
   >
     <nav class="menu__nav">
       <ul class="list-unstyled menu__list">
-        <li class="menu__item">
-          <NuxtLink class="menu__link" to="/forest">
-            Forest
+        <li v-for="(item, key) in menuItems" :key="key" class="menu__item">
+          <NuxtLink
+            ref="button"
+            class="menu__link"
+            :to="item.link"
+            @mouseover.native="mouseHoverAnimation(key, item.class)"
+            @mouseleave.native="mouseOutAnimation(key, item.class)"
+          >
+            {{ item.name }}
             <span class="menu__line" />
           </NuxtLink>
-        </li>
-        <li class="menu__item">
-          <NuxtLink class="menu__link" to="/ocean">
-            Ocean
-            <span class="menu__line" />
-          </NuxtLink>
-        </li>
-        <li class="menu__item">
-          <NuxtLink class="menu__link" to="/desert">
-            Desert
-            <span class="menu__line" />
-          </NuxtLink>
+          <div
+            class="test-img"
+            :class="{ 'test-img--is-shown' : item.isActive }"
+          >
+            <div class="test-img__inner" :style="`transform: translate3d(${item.pos.x}px, ${item.pos.y}px, 0)`">
+              <img :src="item.img">
+            </div>
+          </div>
         </li>
       </ul>
     </nav>
@@ -31,8 +33,29 @@
 <script>
 import { gsap } from 'gsap'
 
+import forestImg from '~/assets/img/bos.jpeg'
+import oceanImg from '~/assets/img/oceaan.jpeg'
+import desertImg from '~/assets/img/desert.jpeg'
+
+import { distance } from '~/utils'
+
 export default {
   name: 'Menu',
+
+  // Eerste state voor data die later te veranderen is
+  data () {
+    return {
+      mouse: {
+        x: 0,
+        y: 0
+      },
+      menuItems: [
+        { name: 'Forest', link: '/forest', img: forestImg, isActive: false, class: 'theme-forest', pos: { x: 0, y: 0 } },
+        { name: 'Ocean', link: '/ocean', img: oceanImg, isActive: false, class: 'theme-ocean', pos: { x: 0, y: 0 } },
+        { name: 'Desert', link: '/desert', img: desertImg, isActive: false, class: 'theme-desert', pos: { x: 0, y: 0 } }
+      ]
+    }
+  },
 
   // State voor variablen die niet te veranderen zijn
   computed: {
@@ -48,13 +71,6 @@ export default {
       }
     }
   },
-
-  // Eerste state voor data die later te veranderen is
-  // data () {
-  //   return {
-  //     henk: false
-  //   }
-  // },
 
   // 1x uitgevoerd als component wordt ingeladen
   mounted () {
@@ -73,12 +89,60 @@ export default {
         stagger: 0.2,
         ease: 'power4.out'
       }, 0.3)
+
+    document.addEventListener('mousemove', this.getMousePos)
+
+    this.onResize()
+    window.addEventListener('resize', this.onResize)
+
+    gsap.ticker.add(this.render)
   },
 
   // hier staan functies / methods in die je aan kunt roepen in je hele component
   methods: {
+    getMousePos ({ x, y }) {
+      this.mouse.x = x
+      this.mouse.y = y
+    },
+    onResize () {
+      this.bounds = []
+
+      this.menuItems.forEach((item, key) => {
+        const bounds = this.$refs.button[key].$el.getBoundingClientRect()
+
+        this.bounds.push(bounds)
+      })
+    },
+    render () {
+      this.menuItems.forEach((item, key) => {
+        const distanceMouseButton = distance(this.mouse.x + window.scrollX, this.mouse.y + window.scrollY, this.bounds[key].left + this.bounds[key].width / 2, this.bounds[key].top + this.bounds[key].height / 2)
+
+        let x = 0
+        let y = 0
+
+        if (distanceMouseButton < this.bounds[key].width * 0.7) {
+          x = (this.mouse.x + window.scrollX - (this.bounds[key].left + this.bounds[key].width / 2)) * 0.3
+          y = (this.mouse.y + window.scrollY - (this.bounds[key].top + this.bounds[key].height / 2)) * 0.3
+        }
+
+        this.menuItems[key].pos.x = x
+        this.menuItems[key].pos.y = y
+      })
+    },
     playAnimation () {
       this.animation.restart()
+    },
+    mouseHoverAnimation (key, themeClass) {
+      if (this.menuIsOpen) {
+        document.body.classList.add(themeClass)
+      }
+      this.menuItems[key].isActive = true
+    },
+    mouseOutAnimation (key, themeClass) {
+      if (this.menuIsOpen) {
+        document.body.classList.remove(themeClass)
+      }
+      this.menuItems[key].isActive = false
     }
   }
 }
@@ -134,7 +198,7 @@ export default {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: calc(100% / 6);
+    height: calc(100% / 5);
     min-height: rem(100px);
     text-transform: uppercase;
 
@@ -161,6 +225,47 @@ export default {
     &.nuxt-link-active .menu__line {
       opacity: 1;
     }
+  }
+}
+
+.test-img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  width: 50%;
+  height: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  opacity: 0;
+  transition: transform 500ms transition(out), opacity 500ms transition(out);
+  transform: translate3d(0, 0, 0) scaleX(.5);
+
+  &__inner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &--is-shown {
+    pointer-events: none;
+    visibility: visible;
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scaleX(1);
   }
 }
 </style>
