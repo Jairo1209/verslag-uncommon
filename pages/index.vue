@@ -1,21 +1,19 @@
 <template>
   <div class="homepage-container">
-    <!-- <homepageSlider /> -->
-
-    <h1>HAKASHIM TIAUIUIS</h1>
-    <p>San Fransico</p>
+    <homepage-slider />
   </div>
 </template>
 
 <script>
 export default {
 
+  mounted () {
+
+  }
+
 }
 </script>
 
 <style lang="scss">
-.homepage-container {
-  width: 100%;
-  height: 100vh;
-}
+//
 </style>
