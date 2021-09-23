@@ -17,7 +17,11 @@
             class="slider-link"
             :to="item.link"
           /> -->
-          <h2 class="swiper-slide__title">
+          <h2
+            class="swiper-slide__title"
+            @mouseover="titleHover"
+            @mouseout="titleHoverOut"
+          >
             {{ item.name }}
           </h2>
 
@@ -30,7 +34,18 @@
       </div>
     </div>
     <div class="cursor">
-      <div class="cursor__inner" />
+      <div class="cursor__inner test">
+        <div
+          ref="arrowWrapper"
+          class="arrow-wrapper"
+        >
+          <div class="arrow-left" />
+          <div class="arrow-right" />
+        </div>
+        <p class="cursor__inner--txt">
+          {{ buttonText }}
+        </p>
+      </div>
     </div>
     <div class="swiper-btn-wrapper">
       <div
@@ -58,6 +73,7 @@ export default {
 
   data () {
     return {
+      buttonText: 'DRAG',
       sliderItems: [
         { name: 'Forest', link: '/forest', img: forestImg, class: 'theme-forest' },
         { name: 'Ocean', link: '/ocean', img: oceanImg, class: 'theme-ocean' },
@@ -69,6 +85,7 @@ export default {
   computed: {},
 
   mounted () {
+    // const titleText = document.querySelector('.swiper-slide__title')
     const cursor = document.querySelector('.cursor')
     document.addEventListener('pointermove', (e) => {
       cursor.style.left = e.pageX + 'px'
@@ -114,16 +131,25 @@ export default {
       document.body.removeAttribute('class')
       document.body.classList.add(bodyClass)
     },
+    titleHover () {
+      this.buttonText = 'CLICK'
+    },
+    titleHoverOut () {
+      this.buttonText = 'DRAG'
+    },
     cursorOver () {
       document.querySelector('.cursor__inner').classList.add('cursor__inner--large')
+      // this.$refs.arrowWrapper.classList.add('is-active')
     },
     cursorOut () {
       document.querySelector('.cursor__inner').classList.remove('cursor__inner--large')
     },
     cursorOverMedium () {
+      document.querySelector('.cursor').classList.add('cursor__medium')
       document.querySelector('.cursor__inner').classList.add('cursor__inner--medium')
     },
     cursorOutMedium () {
+      document.querySelector('.cursor').classList.remove('cursor__medium')
       document.querySelector('.cursor__inner').classList.remove('cursor__inner--medium')
     }
     // sliderAnimation () {
@@ -159,20 +185,66 @@ export default {
   position: fixed;
   z-index: 99999999999999;
   pointer-events: none;
-  mix-blend-mode: difference;
+  // mix-blend-mode: difference;
   transform: translate(-50%, -50%);
   // transition: .1s;
+
+  &__large {
+    mix-blend-mode: normal;
+  }
+
+  &__medium {
+    mix-blend-mode: difference;
+  }
 
   &__inner {
     width: rem(30px);
     height: rem(30px);
     background: #fff;
     border-radius: 50%;
-    transition: all 250ms (ease-in-out);
+    transition: 200ms (ease-in-out);
+
+    .arrow-wrapper {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 200px;
+      height: 100px;
+      opacity: 0;
+
+      &.is-active {
+        opacity: 1;
+      }
+
+      .arrow-left {
+        width: 30px;
+        height: 30px;
+        background-image: img-path('arrow-prev.svg');
+        background-repeat: no-repeat;
+        background-position: left;
+      }
+
+      .arrow-right {
+        width: 30px;
+        height: 30px;
+        background-image: img-path('arrow-next.svg');
+        background-repeat: no-repeat;
+        background-position: right;
+      }
+    }
+
+    p {
+      margin: 0;
+      opacity: 0;
+      // transition-delay: 250ms;
+      // transition-duration: 300ms;
+    }
 
     &--medium {
       width: rem(60px);
       height: rem(60px);
+      mix-blend-mode: difference;
     }
 
     &--large {
@@ -182,8 +254,14 @@ export default {
       width: rem(100px);
       height: rem(100px);
       text-align: center;
-      animation: enlarge 15s ease;
-      animation-iteration-count: infinite;
+
+      // animation: enlarge 15s ease;
+      // animation-iteration-count: infinite;
+
+      p {
+        opacity: 1;
+        transition-delay: 250ms;
+      }
     }
   }
 }
@@ -206,7 +284,7 @@ export default {
   &-wrapper {
     position: relative;
     height: 50%;
-    max-height: 450px;
+    max-height: rem(450px);
   }
 
   &-slide {
@@ -230,8 +308,10 @@ export default {
     &__title {
       position: relative;
       z-index: 2;
-      width: 100%;
       margin: 0;
+      margin-right: auto;
+      // width: 100%;
+      margin-left: auto;
       color: theme-color(light);
       text-align: center;
       text-transform: uppercase;
