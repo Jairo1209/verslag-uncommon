@@ -10,8 +10,8 @@
           :key="key"
           :data-body-class="item.class"
           class="swiper-slide"
-          @mouseover="cursorOver"
-          @mouseout="cursorOut"
+          @mouseover="hoverSlide"
+          @mouseout="hoverSlideOut"
         >
           <!-- <NuxtLink
             class="slider-link"
@@ -33,11 +33,21 @@
         </div>
       </div>
     </div>
-    <div class="cursor">
-      <div class="cursor__inner test">
+
+    <div
+      ref="cursor"
+      class="cursor"
+      :class="{'medium': isHoveringArrows}"
+    >
+      <div
+        ref="cursorInner"
+        class="cursor__inner"
+        :class="{'medium': isHoveringArrows, 'large': isHoveringSlide}"
+      >
         <div
-          ref="arrowWrapper"
-          class="arrow-wrapper"
+          ref="wrapperArrows"
+          class="cursor__inner--wrapper"
+          :class="{active: isHoveringSlide}"
         >
           <div class="arrow-left" />
           <div class="arrow-right" />
@@ -50,13 +60,13 @@
     <div class="swiper-btn-wrapper">
       <div
         class="swiper-button-prev"
-        @mouseover="cursorOverMedium"
-        @mouseout="cursorOutMedium"
+        @mouseover="hoverArrows"
+        @mouseout="hoverArrowsOut"
       />
       <div
         class="swiper-button-next"
-        @mouseover="cursorOverMedium"
-        @mouseout="cursorOutMedium"
+        @mouseover="hoverArrows"
+        @mouseout="hoverArrowsOut"
       />
     </div>
   </div>
@@ -73,6 +83,8 @@ export default {
 
   data () {
     return {
+      isHoveringArrows: false,
+      isHoveringSlide: false,
       buttonText: 'DRAG',
       sliderItems: [
         { name: 'Forest', link: '/forest', img: forestImg, class: 'theme-forest' },
@@ -85,23 +97,11 @@ export default {
   computed: {},
 
   mounted () {
-    // const titleText = document.querySelector('.swiper-slide__title')
     const cursor = document.querySelector('.cursor')
     document.addEventListener('pointermove', (e) => {
       cursor.style.left = e.pageX + 'px'
       cursor.style.top = e.pageY + 'px'
     })
-    // const width = window.innerWidth
-    // const height = window.innerHeight
-
-    // this.animateSlider = gsap.timeline({
-    //   paused: true
-    // })
-    // this.animateSlider.to('.swiper-wrapper',
-    //   {
-    //     scaleX: 1.5,
-    //     scaleY: 1.5
-    //   })
 
     // const Swiper = swiper.Swiper
     Swiper.use([Navigation, Pagination, Mousewheel])
@@ -115,7 +115,7 @@ export default {
       mousewheelControl: true,
       slidesPerView: 'auto',
       centeredSlides: true,
-      loop: true,
+      // loop: true,
       speed: 1300,
       mousewheel: true
     })
@@ -133,28 +133,23 @@ export default {
     },
     titleHover () {
       this.buttonText = 'CLICK'
+      this.$refs.wrapperArrows.classList.remove('active')
     },
     titleHoverOut () {
       this.buttonText = 'DRAG'
     },
-    cursorOver () {
-      document.querySelector('.cursor__inner').classList.add('cursor__inner--large')
-      // this.$refs.arrowWrapper.classList.add('is-active')
+    hoverSlide () {
+      this.isHoveringSlide = true
     },
-    cursorOut () {
-      document.querySelector('.cursor__inner').classList.remove('cursor__inner--large')
+    hoverSlideOut () {
+      this.isHoveringSlide = false
     },
-    cursorOverMedium () {
-      document.querySelector('.cursor').classList.add('cursor__medium')
-      document.querySelector('.cursor__inner').classList.add('cursor__inner--medium')
+    hoverArrows () {
+      this.isHoveringArrows = true
     },
-    cursorOutMedium () {
-      document.querySelector('.cursor').classList.remove('cursor__medium')
-      document.querySelector('.cursor__inner').classList.remove('cursor__inner--medium')
+    hoverArrowsOut () {
+      this.isHoveringArrows = false
     }
-    // sliderAnimation () {
-    //   this.animateSlider.play()
-    // }
   }
 }
 </script>
@@ -187,14 +182,14 @@ export default {
   pointer-events: none;
   // mix-blend-mode: difference;
   transform: translate(-50%, -50%);
-  // transition: .1s;
 
-  &__large {
-    mix-blend-mode: normal;
+  &.medium {
+    mix-blend-mode: difference;
   }
 
-  &__medium {
-    mix-blend-mode: difference;
+  p {
+    margin: 0;
+    opacity: 0;
   }
 
   &__inner {
@@ -204,7 +199,26 @@ export default {
     border-radius: 50%;
     transition: 200ms (ease-in-out);
 
-    .arrow-wrapper {
+    &.medium {
+      width: rem(60px);
+      height: rem(60px);
+    }
+
+    &.large {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: rem(100px);
+      height: rem(100px);
+      text-align: center;
+
+      p {
+        opacity: 1;
+        transition-delay: 250ms;
+      }
+    }
+
+    &--wrapper {
       position: absolute;
       display: flex;
       align-items: center;
@@ -213,7 +227,7 @@ export default {
       height: 100px;
       opacity: 0;
 
-      &.is-active {
+      &.active {
         opacity: 1;
       }
 
@@ -231,36 +245,6 @@ export default {
         background-image: img-path('arrow-next.svg');
         background-repeat: no-repeat;
         background-position: right;
-      }
-    }
-
-    p {
-      margin: 0;
-      opacity: 0;
-      // transition-delay: 250ms;
-      // transition-duration: 300ms;
-    }
-
-    &--medium {
-      width: rem(60px);
-      height: rem(60px);
-      mix-blend-mode: difference;
-    }
-
-    &--large {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: rem(100px);
-      height: rem(100px);
-      text-align: center;
-
-      // animation: enlarge 15s ease;
-      // animation-iteration-count: infinite;
-
-      p {
-        opacity: 1;
-        transition-delay: 250ms;
       }
     }
   }
