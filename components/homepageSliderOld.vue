@@ -1,5 +1,5 @@
-slider<template>
-  <div class="slider slider__wrapper">
+<template>
+  <div class="homepage-container">
     <!-- Slider main container -->
     <div ref="swiper" class="swiper">
       <!-- Additional required wrapper -->
@@ -15,12 +15,12 @@ slider<template>
         >
           <a
             :href="item.link"
-            class="slider__link"
+            class="slider-link"
             :to="item.link"
             @click.prevent="onRouteChange($event, item.link)"
           >
             <h2
-              class="slider__title"
+              class="swiper-slide__title"
               @mouseover="titleHover"
               @mouseout="titleHoverOut"
             >
@@ -37,24 +37,26 @@ slider<template>
         </div>
       </div>
     </div>
+
     <div
       ref="cursor"
       class="cursor"
-      :class="{'medium': isHoveringArrows, 'cursor--active' : isHoveringSlide, 'cursor--disabled': isHoveringTitle}"
+      :class="{'medium': isHoveringArrows}"
     >
       <div
         ref="cursorInner"
         class="cursor__inner"
-        :class="{'cursor__inner--medium': isHoveringArrows, 'cursor__inner--large': isHoveringSlide}"
+        :class="{'medium': isHoveringArrows, 'large': isHoveringSlide}"
       >
         <div
           ref="wrapperArrows"
-          class="cursor__wrapper"
+          class="cursor__inner--wrapper"
+          :class="{active: isHoveringSlide, disable: isHoveringTitle}"
         >
-          <div class="cursor__arrow cursor__arrow--left" />
-          <div class="cursor__arrow cursor__arrow--right" />
+          <div class="arrow arrow--left" />
+          <div class="arrow arrow--right" />
         </div>
-        <p>
+        <p class="cursor__inner--txt">
           {{ buttonText }}
         </p>
       </div>
@@ -188,42 +190,13 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.slider {
-  &__wrapper {
-    width: 100%;
-    height: 100vh;
-    cursor: none;
-    background-color: theme-color(forest);
-    transition: all 500ms transition(out);
-  }
 
-  &__link {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    cursor: none;
-    // border: solid 1px red;
-  }
-
-  &__title {
-    position: relative;
-    z-index: 2;
-    padding: 0 10%;
-    margin: 0;
-    margin-right: auto;
-    margin-left: auto;
-    color: theme-color(light);
-    text-align: center;
-    text-transform: uppercase;
-    opacity: 0;
-    transition: 400ms (ease-in-out);
-    transition-delay: 400ms;
-    transform: translate3d(0, rem(100px), 0);
-  }
+.homepage-container {
+  width: 100%;
+  height: 100vh;
+  cursor: none;
+  background-color: theme-color(forest);
+  transition: all 500ms transition(out);
 
   body.theme-forest & {
     background: theme-color(forest);
@@ -253,64 +226,6 @@ export default {
     opacity: 0;
   }
 
-  &__arrow {
-    width: 30px;
-    height: 30px;
-    background-repeat: no-repeat;
-    opacity: 0;
-    transition: transform 250ms ease-in;
-
-    &--left {
-      background-image: img-path('arrow-prev.svg');
-      background-position: left;
-      transform: translate3d(rem(50px), 0, 0);
-    }
-
-    &--right {
-      background-image: img-path('arrow-next.svg');
-      background-position: right;
-      transform: translate3d(rem(-50px), 0, 0);
-    }
-  }
-
-  &--active & {
-    &__arrow {
-      opacity: 1;
-      transition: transform 250ms ease-in;
-
-      &--left {
-        transform: translate3d(0, 0, 0);
-      }
-
-      &--right {
-        transform: translate3d(0, 0, 0);
-      }
-    }
-  }
-
-  &--disabled & {
-    &__arrow {
-      transition: transform 250ms ease-out;
-
-      &--left {
-        transform: translate3d(50px, 0, 0);
-      }
-
-      &--right {
-        transform: translate3d(-50px, 0, 0);
-      }
-    }
-  }
-
-  &__wrapper {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 200px;
-    height: 100px;
-  }
-
   &__inner {
     width: rem(30px);
     height: rem(30px);
@@ -318,12 +233,12 @@ export default {
     border-radius: 50%;
     transition: 200ms (ease-in-out);
 
-    &--medium {
+    &.medium {
       width: rem(60px);
       height: rem(60px);
     }
 
-    &--large {
+    &.large {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -334,6 +249,65 @@ export default {
       p {
         opacity: 1;
         transition-delay: 250ms;
+      }
+    }
+
+    &--wrapper {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 200px;
+      height: 100px;
+      opacity: 0;
+
+      .arrow {
+        width: 30px;
+        height: 30px;
+        background-repeat: no-repeat;
+        transition: transform 250ms ease-in;
+
+        &--left {
+          background-image: img-path('arrow-prev.svg');
+          background-position: left;
+          transform: translate3d(rem(50px), 0, 0);
+        }
+
+        &--right {
+          background-image: img-path('arrow-next.svg');
+          background-position: right;
+          transform: translate3d(rem(-50px), 0, 0);
+        }
+      }
+
+      &.active {
+        opacity: 1;
+
+        .arrow {
+          transition: transform 250ms ease-in;
+        }
+
+        .arrow--left {
+          transform: translate3d(0, 0, 0);
+        }
+
+        .arrow--right {
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      &.disable {
+        .arrow {
+          transition: transform 250ms ease-out;
+        }
+
+        .arrow--left {
+          transform: translate3d(50px, 0, 0);
+        }
+
+        .arrow--right {
+          transform: translate3d(-50px, 0, 0);
+        }
       }
     }
   }
@@ -361,11 +335,38 @@ export default {
     height: 100%;
     transition: transform 1100ms (ease-in-out);
 
+    a.slider-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      cursor: none;
+    }
+
+    &__title {
+      position: relative;
+      z-index: 2;
+      padding: 0 10%;
+      margin: 0;
+      margin-right: auto;
+      margin-left: auto;
+      color: theme-color(light);
+      text-align: center;
+      text-transform: uppercase;
+      opacity: 0;
+      transition: 400ms (ease-in-out);
+      transition-delay: 400ms;
+      transform: translate3d(0, rem(100px), 0);
+    }
+
     &-active {
       transition-delay: 500ms;
       transform: scale(1.1);
 
-      .slider__title {
+      .swiper-slide__title {
         opacity: 1;
         transform: translate3d(0, 0, 0);
       }
@@ -446,6 +447,10 @@ export default {
 @include media-breakpoint-down(sm) {
   .cursor {
     display: none;
+
+    &__inner {
+      display: none;
+    }
   }
 
   .swiper-slide {

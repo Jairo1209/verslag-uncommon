@@ -33,9 +33,9 @@
 <script>
 import { gsap } from 'gsap'
 
-import forestImg from '~/assets/img/bos.jpeg'
-import oceanImg from '~/assets/img/oceaan.jpeg'
-import desertImg from '~/assets/img/desert.jpeg'
+import forestImg from '~/assets/img/bos.jpg'
+import oceanImg from '~/assets/img/oceaan.jpg'
+import desertImg from '~/assets/img/desert.jpg'
 
 import { distance } from '~/utils'
 
@@ -156,6 +156,7 @@ export default {
   z-index: 1;
   width: 100%;
   height: 100vh;
+  cursor: none;
   visibility: hidden;
   background: theme-color(ocean);
   opacity: 0;

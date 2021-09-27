@@ -37,6 +37,7 @@ $hamburger-width: rem(40px);
   z-index: 10;
   width: $hamburger-width;
   height: rem(30px);
+  cursor: none;
 
   span {
     position: absolute;

@@ -1,6 +1,9 @@
 <template>
   <div class="">
-    <h1>Ocean pagina</h1>
+    <div class="hero-test">
+      <img src="~@/assets/img/oceaan.jpg" alt="">
+    </div>
+    <div style="height: 2000px;" />
   </div>
 </template>
 

@@ -4,11 +4,15 @@
  */
 
 export const state = () => ({
-  menuIsOpen: false
+  menuIsOpen: false,
+  transitionRemoved: true
 })
 
 export const mutations = {
   setMenuState (state, payload) {
     state.menuIsOpen = payload
+  },
+  removeTransition (state, payload) {
+    state.transitionRemoved = payload
   }
 }
