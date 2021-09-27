@@ -44,7 +44,6 @@ export default {
   left: 0;
   z-index: 99;
   width: 100%;
-  cursor: none;
 
   &__bar {
     position: relative;
@@ -65,7 +64,6 @@ export default {
 
   .logo {
     color: white;
-    cursor: none;
   }
 }
 </style>

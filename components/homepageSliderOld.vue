@@ -41,17 +41,17 @@
     <div
       ref="cursor"
       class="cursor"
-      :class="{'medium': isHoveringArrows}"
+      :class="{'medium': sizeMedium}"
     >
       <div
         ref="cursorInner"
         class="cursor__inner"
-        :class="{'medium': isHoveringArrows, 'large': isHoveringSlide}"
+        :class="{'medium': sizeMedium, 'large': cursorEnable}"
       >
         <div
           ref="wrapperArrows"
           class="cursor__inner--wrapper"
-          :class="{active: isHoveringSlide, disable: isHoveringTitle}"
+          :class="{active: cursorEnable, disable: cursorDisable}"
         >
           <div class="arrow arrow--left" />
           <div class="arrow arrow--right" />
@@ -87,9 +87,9 @@ export default {
 
   data () {
     return {
-      isHoveringArrows: false,
-      isHoveringSlide: false,
-      isHoveringTitle: false,
+      sizeMedium: false,
+      cursorEnable: false,
+      cursorDisable: false,
       buttonText: 'DRAG',
       sliderItems: [
         { name: 'Forest', link: '/forest', img: forestImg, class: 'theme-forest' },
@@ -168,23 +168,23 @@ export default {
     },
     titleHover () {
       this.buttonText = 'CLICK'
-      this.isHoveringTitle = true
+      this.cursorDisable = true
     },
     titleHoverOut () {
       this.buttonText = 'DRAG'
-      this.isHoveringTitle = false
+      this.cursorDisable = false
     },
     hoverSlide () {
-      this.isHoveringSlide = true
+      this.cursorEnable = true
     },
     hoverSlideOut () {
-      this.isHoveringSlide = false
+      this.cursorEnable = false
     },
     hoverArrows () {
-      this.isHoveringArrows = true
+      this.sizeMedium = true
     },
     hoverArrowsOut () {
-      this.isHoveringArrows = false
+      this.sizeMedium = false
     }
   }
 }

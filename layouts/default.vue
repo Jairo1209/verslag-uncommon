@@ -1,7 +1,7 @@
 <template>
   <div>
     <LayoutHeader />
-
+    <LayoutCustomCursor />
     <div id="transition-wrapper" ref="wrapper" class="transition" />
 
     <main>
@@ -11,6 +11,7 @@
 </template>
 
 <script>
+// import CursorComponent from '~/components/layout/Cursor.vue'
 export default {
   computed: {
     transitionRemoved () {

@@ -10,17 +10,17 @@
             ref="button"
             class="menu__link"
             :to="item.link"
-            @mouseover.native="mouseHoverAnimation(key, item.class)"
-            @mouseleave.native="mouseOutAnimation(key, item.class)"
+            @mouseover.native="mouseHoverAnimation(key, item.class), linkHover()"
+            @mouseleave.native="mouseOutAnimation(key, item.class), linkHoverOut()"
           >
             {{ item.name }}
             <span class="menu__line" />
           </NuxtLink>
           <div
-            class="test-img"
-            :class="{ 'test-img--is-shown' : item.isActive }"
+            class="preview-img"
+            :class="{ 'preview-img--is-shown' : item.isActive }"
           >
-            <div class="test-img__inner" :style="`transform: translate3d(${item.pos.x}px, ${item.pos.y}px, 0)`">
+            <div class="preview-img__inner" :style="`transform: translate3d(${item.pos.x}px, ${item.pos.y}px, 0)`">
               <img :src="item.img">
             </div>
           </div>
@@ -143,6 +143,12 @@ export default {
         document.body.classList.remove(themeClass)
       }
       this.menuItems[key].isActive = false
+    },
+    linkHover () {
+      this.$store.commit('setCursorMedium', true)
+    },
+    linkHoverOut () {
+      this.$store.commit('setCursorMedium', false)
     }
   }
 }
@@ -156,9 +162,9 @@ export default {
   z-index: 1;
   width: 100%;
   height: 100vh;
-  cursor: none;
+  // cursor: none;
   visibility: hidden;
-  background: theme-color(ocean);
+  background: theme-color(forest);
   opacity: 0;
   transition: all 500ms transition(out);
 
@@ -229,7 +235,7 @@ export default {
   }
 }
 
-.test-img {
+.preview-img {
   position: absolute;
   top: 0;
   right: 0;

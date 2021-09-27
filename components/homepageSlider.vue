@@ -1,4 +1,4 @@
-slider<template>
+<template>
   <div class="slider slider__wrapper">
     <!-- Slider main container -->
     <div ref="swiper" class="swiper">
@@ -37,28 +37,6 @@ slider<template>
         </div>
       </div>
     </div>
-    <div
-      ref="cursor"
-      class="cursor"
-      :class="{'medium': isHoveringArrows, 'cursor--active' : isHoveringSlide, 'cursor--disabled': isHoveringTitle}"
-    >
-      <div
-        ref="cursorInner"
-        class="cursor__inner"
-        :class="{'cursor__inner--medium': isHoveringArrows, 'cursor__inner--large': isHoveringSlide}"
-      >
-        <div
-          ref="wrapperArrows"
-          class="cursor__wrapper"
-        >
-          <div class="cursor__arrow cursor__arrow--left" />
-          <div class="cursor__arrow cursor__arrow--right" />
-        </div>
-        <p>
-          {{ buttonText }}
-        </p>
-      </div>
-    </div>
     <div class="swiper-btn-wrapper">
       <div
         class="swiper__button swiper__button--prev"
@@ -85,10 +63,6 @@ export default {
 
   data () {
     return {
-      isHoveringArrows: false,
-      isHoveringSlide: false,
-      isHoveringTitle: false,
-      buttonText: 'DRAG',
       sliderItems: [
         { name: 'Forest', link: '/forest', img: forestImg, class: 'theme-forest' },
         { name: 'Ocean', link: '/ocean', img: oceanImg, class: 'theme-ocean' },
@@ -97,15 +71,7 @@ export default {
     }
   },
 
-  computed: {},
-
   mounted () {
-    const cursor = document.querySelector('.cursor')
-    document.addEventListener('pointermove', (e) => {
-      cursor.style.left = e.pageX + 'px'
-      cursor.style.top = e.pageY + 'px'
-    })
-
     // const Swiper = swiper.Swiper
     Swiper.use([Navigation, Pagination, Mousewheel])
 
@@ -118,7 +84,8 @@ export default {
       mousewheelControl: true,
       slidesPerView: 'auto',
       centeredSlides: true,
-      // loop: true,
+      loop: true,
+      loopedSlides: 6,
       speed: 1300,
       mousewheel: true
     })
@@ -165,24 +132,25 @@ export default {
       document.body.classList.add(bodyClass)
     },
     titleHover () {
-      this.buttonText = 'CLICK'
-      this.isHoveringTitle = true
+      // this.cursorDisable = true
+      this.$store.commit('setCursorDisable', true)
+      this.$store.commit('setButtonText', 'CLICK')
     },
     titleHoverOut () {
-      this.buttonText = 'DRAG'
-      this.isHoveringTitle = false
+      this.$store.commit('setCursorDisable', false)
+      this.$store.commit('setButtonText', 'DRAG')
     },
     hoverSlide () {
-      this.isHoveringSlide = true
+      this.$store.commit('setCursorEnable', true)
     },
     hoverSlideOut () {
-      this.isHoveringSlide = false
+      this.$store.commit('setCursorEnable', false)
     },
     hoverArrows () {
-      this.isHoveringArrows = true
+      this.$store.commit('setCursorMedium', true)
     },
     hoverArrowsOut () {
-      this.isHoveringArrows = false
+      this.$store.commit('setCursorMedium', false)
     }
   }
 }
@@ -192,7 +160,7 @@ export default {
   &__wrapper {
     width: 100%;
     height: 100vh;
-    cursor: none;
+    // cursor: none;
     background-color: theme-color(forest);
     transition: all 500ms transition(out);
   }
@@ -205,7 +173,7 @@ export default {
     align-items: center;
     width: 100%;
     height: 100%;
-    cursor: none;
+    // cursor: none;
     // border: solid 1px red;
   }
 
@@ -444,9 +412,9 @@ export default {
 }
 
 @include media-breakpoint-down(sm) {
-  .cursor {
-    display: none;
-  }
+  // .cursor {
+  //   display: none;
+  // }
 
   .swiper-slide {
     &__title {
@@ -454,5 +422,4 @@ export default {
     }
   }
 }
-
 </style>
