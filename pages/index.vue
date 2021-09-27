@@ -1,21 +1,19 @@
 <template>
-  <div class="homepage-wrap">
-    <div class="container">
-      <!--  -->
-    </div>
+  <div class="homepage-container">
+    <homepage-slider />
   </div>
 </template>
 
 <script>
 export default {
 
+  mounted () {
+
+  }
+
 }
 </script>
 
 <style lang="scss">
-.homepage-wrap {
-  width: 100%;
-  height: 100vh;
-  background-color: red;
-}
+//
 </style>

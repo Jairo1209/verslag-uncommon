@@ -64,7 +64,6 @@ export default {
 
   .logo {
     color: white;
-    cursor: pointer;
   }
 }
 </style>

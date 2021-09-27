@@ -1,7 +1,10 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
-
+  // server: {
+  //   port: 8000, // default: 3000
+  //   host: '0.0.0.0' // default: localhost
+  // },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'nature-project',
@@ -26,11 +29,13 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '~/assets/scss/main.scss'
+    '~/assets/scss/main.scss',
+    'swiper/swiper.min.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/swiper.js', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

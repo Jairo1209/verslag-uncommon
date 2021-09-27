@@ -28,5 +28,12 @@
 @import 'base/type';
 
 // Components
+@import 'components/hero';
 @import 'components/image';
 @import 'components/svg-icon';
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
