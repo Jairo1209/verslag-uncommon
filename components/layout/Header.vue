@@ -2,7 +2,12 @@
   <header class="header" :class="{ 'has-another-color' : changeMenuColor }">
     <div class="header__bar">
       <div class="header__logo" @click.prevent="onClick">
-        <NuxtLink class="logo" to="/">
+        <NuxtLink
+          class="logo"
+          to="/"
+          @mouseover.native="linkHover()"
+          @mouseleave.native="linkHoverOut()"
+        >
           {{ logoText }}
         </NuxtLink>
       </div>
@@ -32,6 +37,12 @@ export default {
   methods: {
     onClick (e) {
       this.changeMenuColor = !this.changeMenuColor
+    },
+    linkHover () {
+      this.$store.commit('setCursorMedium', true)
+    },
+    linkHoverOut () {
+      this.$store.commit('setCursorMedium', false)
     }
   }
 }
@@ -52,18 +63,18 @@ export default {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: rem(60px);
+    height: rem(80px);
     padding: 0 rem(30px);
   }
 
   &__logo {
     z-index: 999;
     font-size: rem(40px);
-    color: white;
+    color: theme-color(light);
   }
 
   .logo {
-    color: white;
+    color: theme-color(light);
   }
 }
 </style>

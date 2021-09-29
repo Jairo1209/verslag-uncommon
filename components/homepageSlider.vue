@@ -32,7 +32,6 @@
                 <img class="img" :src="item.img" alt="">
               </div>
             </div>
-
           </a>
         </div>
       </div>
@@ -55,8 +54,8 @@
 <script>
 import { gsap } from 'gsap'
 import { Swiper, Navigation, Pagination, Mousewheel } from '~/plugins/swiper.js'
-import forestImg from '~/assets/img/bos.jpg'
-import oceanImg from '~/assets/img/oceaan.jpg'
+import forestImg from '~/assets/img/forest.jpg'
+import oceanImg from '~/assets/img/ocean.jpg'
 import desertImg from '~/assets/img/desert.jpg'
 export default {
   name: 'HomepageSlider',
@@ -70,7 +69,6 @@ export default {
       ]
     }
   },
-
   mounted () {
     // const Swiper = swiper.Swiper
     Swiper.use([Navigation, Pagination, Mousewheel])
@@ -83,6 +81,7 @@ export default {
       spaceBetween: 80,
       mousewheelControl: true,
       slidesPerView: 'auto',
+      allowTouchMove: false,
       centeredSlides: true,
       loop: true,
       loopedSlides: 6,
@@ -94,7 +93,6 @@ export default {
       this.activeSlideClass(swiper.activeIndex, swiper.slides)
     })
   },
-
   methods: {
     onRouteChange ($event, url) {
       const el = $event.currentTarget
@@ -111,7 +109,6 @@ export default {
       wrapper.appendChild(image)
 
       this.$store.commit('removeTransition', false)
-
       gsap.fromTo(wrapper, {
         scaleY: y,
         scaleX: x

@@ -5,6 +5,8 @@
     class="hamburger"
     type="button"
     @click="toggleHamburger"
+    @mouseover="linkHover()"
+    @mouseleave="linkHoverOut()"
   >
     <span />
     <span />
@@ -24,6 +26,12 @@ export default {
   methods: {
     toggleHamburger () {
       this.$store.commit('setMenuState', !this.menuIsOpen)
+    },
+    linkHover () {
+      this.$store.commit('setCursorMedium', true)
+    },
+    linkHoverOut () {
+      this.$store.commit('setCursorMedium', false)
     }
   }
 }
@@ -43,7 +51,7 @@ $hamburger-width: rem(40px);
     top: 50%;
     width: $hamburger-width;
     height: rem(2px);
-    background-color: white;
+    background-color: theme-color(light);
     transition: transform 300ms transition(outquint), background-color 300ms transition(outquint);
 
     &:nth-of-type(1) {
@@ -57,7 +65,7 @@ $hamburger-width: rem(40px);
 
   &.is-open {
     span {
-      background-color: white;
+      background-color: theme-color(light);
     }
 
     span:nth-of-type(1) {

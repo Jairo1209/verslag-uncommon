@@ -1,0 +1,49 @@
+/* kaisei-tokumin-regular - latin */
+@font-face {
+  font-family: 'Kaisei Tokumin';
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url('./kaisei-tokumin-v1-latin-regular.woff2') format('woff2'),
+    url('./kaisei-tokumin-v1-regular.woff') format('woff'),;
+}
+
+/* kaisei-tokumin-500 - latin */
+@font-face {
+  font-family: 'Kaisei Tokumin';
+  font-style: normal;
+  font-weight: 500;
+  src:
+    url('./kaisei-tokumin-v1-latin-500.woff2') format('woff2'),
+    url('./kaisei-tokumin-v1-latin-500.woff') format('woff');
+}
+
+/* kaisei-tokumin-700 - latin */
+@font-face {
+  font-family: 'Kaisei Tokumin';
+  font-style: normal;
+  font-weight: 700;
+  src:
+    url('./kaisei-tokumin-v1-latin-700.woff2') format('woff2'),
+    url('./kaisei-tokumin-v1-latin-700.woff') format('woff');
+}
+
+/* kaisei-tokumin-700 - latin */
+@font-face {
+  font-family: 'SF Pro';
+  font-style: normal;
+  font-weight: 700;
+  src:
+    url('./sf-pro-text-bold.woff2') format('woff2'),
+    url('./sf-pro-text-bold.woff') format('woff');
+}
+
+/* kaisei-tokumin-700 - latin */
+@font-face {
+  font-family: 'SF Pro';
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url('./sf-pro-text-regular.woff2') format('woff2'),
+    url('./sf-pro-text-regular.woff') format('woff');
+}

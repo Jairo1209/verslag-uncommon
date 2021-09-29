@@ -47,6 +47,9 @@ export default {
     },
     sizeMedium () {
       return this.$store.state.sizeMedium
+    },
+    sizeLarge () {
+      return this.$store.state.sizeLarge
     }
   },
 
@@ -66,9 +69,9 @@ export default {
   },
 
   methods: {
-    onPointerMove ({ pageX, pageY }) {
-      this.mouse.x = pageX
-      this.mouse.y = pageY
+    onPointerMove ({ x, y }) {
+      this.mouse.x = x
+      this.mouse.y = y
     },
 
     onTicker () {
