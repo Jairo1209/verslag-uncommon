@@ -2,7 +2,6 @@
  * Vuex store
  * Check https://nuxtjs.org/guide/vuex-store/ for more info
  */
-
 export const state = () => ({
   menuIsOpen: false,
   transitionRemoved: true,
@@ -10,7 +9,8 @@ export const state = () => ({
   cursorDisable: false,
   cursorEnable: false,
   sizeMedium: false,
-  sizeLarge: false
+  sizeLarge: false,
+  titleActive: false
 })
 
 export const mutations = {
@@ -34,5 +34,8 @@ export const mutations = {
   },
   setCursorLarge (state, payload) {
     state.sizeLarge = payload
+  },
+  setTitleActive (state, payload) {
+    state.titleActive = payload
   }
 }

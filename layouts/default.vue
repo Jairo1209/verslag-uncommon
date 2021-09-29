@@ -11,7 +11,6 @@
 </template>
 
 <script>
-// import CursorComponent from '~/components/layout/Cursor.vue'
 export default {
   computed: {
     transitionRemoved () {
@@ -25,6 +24,9 @@ export default {
           this.$refs.wrapper.removeChild(this.$refs.wrapper.querySelector('img'))
         }, 500)
       }
+    },
+    $route (params, app) {
+      this.$store.commit('setCursorEnable', false)
     }
   }
 }

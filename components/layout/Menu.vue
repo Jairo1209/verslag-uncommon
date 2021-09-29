@@ -33,8 +33,8 @@
 <script>
 import { gsap } from 'gsap'
 
-import forestImg from '~/assets/img/bos.jpg'
-import oceanImg from '~/assets/img/oceaan.jpg'
+import forestImg from '~/assets/img/forest.jpg'
+import oceanImg from '~/assets/img/ocean.jpg'
 import desertImg from '~/assets/img/desert.jpg'
 
 import { distance } from '~/utils'
