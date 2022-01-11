@@ -4,11 +4,7 @@
     <div
       style="height: 2000px;"
       class=""
-    >
-      <!-- <p
-        v-html="oceanTxt"
-      /> -->
-    </div>
+    />
   </div>
 </template>
 
@@ -16,14 +12,14 @@
 import forestTxt from '~/content/forest.md'
 import oceanTxt from '~/content/ocean.md'
 import desertTxt from '~/content/desert.md'
-const slugs = ['ocean', 'desert', 'forest']
+const slugs = ['home', 'bpv-1', 'bpv-2', 'slot']
 export default {
   asyncData ({ params, app }) {
     if (slugs.includes(params.slug)) {
       app.head.bodyAttrs = { class: `theme-${params.slug}` }
 
       return {
-        image: require(`~/assets/img/${params.slug}.jpg`)
+        image: require(`~/assets/img_slug/${params.slug}.jpg`)
       }
     } else {
       // eslint-disable-next-line

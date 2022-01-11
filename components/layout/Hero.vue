@@ -10,13 +10,6 @@
       alt="heroImg"
       class="hero__img"
     >
-    <div class="clouds">
-      <div class="clouds__wrapper">
-        <img src="~/assets/img/clouds.png" alt="" class="clouds__one">
-        <img src="~/assets/img/clouds.png" alt="" class="clouds__two">
-        <img src="~/assets/img/clouds.png" alt="" class="clouds__three">
-      </div>
-    </div>
   </div>
 </template>
 
@@ -80,27 +73,6 @@ export default {
     }, {
       y: -400
     }, 0)
-    timeline.fromTo('.clouds__one', {
-      y: 0,
-      opacity: 0
-    }, {
-      y: -900,
-      opacity: 1
-    }, 0)
-    timeline.fromTo('.clouds__two', {
-      y: 0,
-      opacity: 0
-    }, {
-      y: -700,
-      opacity: 1
-    }, 0)
-    timeline.fromTo('.clouds__three', {
-      y: 0,
-      opacity: 0
-    }, {
-      y: -600,
-      opacity: 1
-    }, 0)
   }
 }
 </script>
@@ -115,16 +87,12 @@ export default {
   width: 100%;
   height: 100vh;
 
-  body.theme-forest & {
-    background: theme-color(forest);
+  body.theme-dark & {
+    background: theme-color(dark);
   }
 
-  body.theme-desert & {
-    background: theme-color(desert);
-  }
-
-  body.theme-ocean & {
-    background: theme-color(ocean);
+  body.theme-light & {
+    background: theme-color(light);
   }
 
   &__img {
@@ -142,43 +110,4 @@ export default {
     text-transform: uppercase;
   }
 }
-
-.clouds {
-  position: absolute;
-  bottom: -200px;
-  width: 100%;
-  height: rem(450px);
-
-  &__wrapper {
-    position: relative;
-    display: flex;
-  }
-
-  &__one {
-    position: absolute;
-    left: 0;
-    z-index: 1;
-    width: 90%;
-  }
-
-  &__two {
-    position: absolute;
-    right: 0;
-    z-index: 2;
-    width: 80%;
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-  }
-
-  &__three {
-    position: absolute;
-    right: 0;
-    left: 0;
-    z-index: 3;
-    width: 80%;
-    margin-right: auto;
-    margin-left: auto;
-  }
-}
-
 </style>

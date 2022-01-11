@@ -33,9 +33,10 @@
 <script>
 import { gsap } from 'gsap'
 
-import forestImg from '~/assets/img/forest.jpg'
-import oceanImg from '~/assets/img/ocean.jpg'
-import desertImg from '~/assets/img/desert.jpg'
+import homeImg from '~/assets/img/home.jpg'
+import bpv1Img from '~/assets/img/bpv-1.jpg'
+import bpv2Img from '~/assets/img/bpv-2.jpg'
+import slotImg from '~/assets/img/slot.jpg'
 
 import { distance } from '~/utils'
 
@@ -50,9 +51,10 @@ export default {
         y: 0
       },
       menuItems: [
-        { name: 'Forest', link: '/forest', img: forestImg, isActive: false, class: 'theme-forest', pos: { x: 0, y: 0 } },
-        { name: 'Ocean', link: '/ocean', img: oceanImg, isActive: false, class: 'theme-ocean', pos: { x: 0, y: 0 } },
-        { name: 'Desert', link: '/desert', img: desertImg, isActive: false, class: 'theme-desert', pos: { x: 0, y: 0 } }
+        { name: 'Home', link: '/home', img: homeImg, isActive: false, class: 'theme-dark', pos: { x: 0, y: 0 } },
+        { name: 'Bpv-1', link: '/bpv-1', img: bpv1Img, isActive: false, class: 'theme-light', pos: { x: 0, y: 0 } },
+        { name: 'Bpv-2', link: '/bpv-2', img: bpv2Img, isActive: false, class: 'theme-light', pos: { x: 0, y: 0 } },
+        { name: 'Bpv-2', link: '/slot', img: slotImg, isActive: false, class: 'theme-dark', pos: { x: 0, y: 0 } }
       ]
     }
   },
@@ -164,20 +166,16 @@ export default {
   height: 100vh;
   // cursor: none;
   visibility: hidden;
-  background: theme-color(forest);
+  background: theme-color(dark);
   opacity: 0;
   transition: all 500ms transition(out);
 
-  body.theme-forest & {
-    background: theme-color(forest);
+  body.theme-dark & {
+    background: theme-color(dark);
   }
 
-  body.theme-desert & {
-    background: theme-color(desert);
-  }
-
-  body.theme-ocean & {
-    background: theme-color(ocean);
+  body.theme-light & {
+    background: theme-color(light);
   }
 
   &.is-open {
