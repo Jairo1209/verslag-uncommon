@@ -64,6 +64,8 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    //
+    '@nuxtjs/markdownit'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
