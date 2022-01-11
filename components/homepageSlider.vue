@@ -10,8 +10,6 @@
           :key="key"
           :data-body-class="item.class"
           class="swiper-slide"
-          @mouseover="hoverSlide"
-          @mouseout="hoverSlideOut"
         >
           <a
             :href="item.link"
@@ -21,8 +19,6 @@
           >
             <h2
               class="slider__title"
-              @mouseover="titleHover"
-              @mouseout="titleHoverOut"
             >
               {{ item.name }}
             </h2>
@@ -39,13 +35,9 @@
     <div class="swiper-btn-wrapper">
       <div
         class="swiper__button swiper__button--prev"
-        @mouseover="hoverArrows"
-        @mouseout="hoverArrowsOut"
       />
       <div
         class="swiper__button swiper__button--next"
-        @mouseover="hoverArrows"
-        @mouseout="hoverArrowsOut"
       />
     </div>
   </div>
@@ -54,18 +46,20 @@
 <script>
 import { gsap } from 'gsap'
 import { Swiper, Navigation, Pagination, Mousewheel } from '~/plugins/swiper.js'
-import forestImg from '~/assets/img/forest.jpg'
-import oceanImg from '~/assets/img/ocean.jpg'
-import desertImg from '~/assets/img/desert.jpg'
+import homeImg from '~/assets/img/home.jpg'
+import bpv1Img from '~/assets/img/bpv-1.jpg'
+import bpv2Img from '~/assets/img/bpv-2.jpg'
+import slotImg from '~/assets/img/slot.jpg'
 export default {
   name: 'HomepageSlider',
 
   data () {
     return {
       sliderItems: [
-        { name: 'Forest', link: '/forest', img: forestImg, class: 'theme-forest' },
-        { name: 'Ocean', link: '/ocean', img: oceanImg, class: 'theme-ocean' },
-        { name: 'Desert', link: '/desert', img: desertImg, class: 'theme-desert' }
+        { name: 'Home', link: '/home', img: homeImg, class: 'theme-dark' },
+        { name: 'Bpv-1', link: '/bpv-1', img: bpv1Img, class: 'theme-light' },
+        { name: 'Bpv-2', link: '/bpv-2', img: bpv2Img, class: 'theme-light' },
+        { name: 'Slot', link: '/slot', img: slotImg, class: 'theme-dark' }
       ]
     }
   },
@@ -127,27 +121,6 @@ export default {
       const bodyClass = slides[key].dataset.bodyClass
       document.body.removeAttribute('class')
       document.body.classList.add(bodyClass)
-    },
-    titleHover () {
-      // this.cursorDisable = true
-      this.$store.commit('setCursorDisable', true)
-      this.$store.commit('setButtonText', 'CLICK')
-    },
-    titleHoverOut () {
-      this.$store.commit('setCursorDisable', false)
-      this.$store.commit('setButtonText', 'DRAG')
-    },
-    hoverSlide () {
-      this.$store.commit('setCursorEnable', true)
-    },
-    hoverSlideOut () {
-      this.$store.commit('setCursorEnable', false)
-    },
-    hoverArrows () {
-      this.$store.commit('setCursorMedium', true)
-    },
-    hoverArrowsOut () {
-      this.$store.commit('setCursorMedium', false)
     }
   }
 }
@@ -157,8 +130,7 @@ export default {
   &__wrapper {
     width: 100%;
     height: 100vh;
-    // cursor: none;
-    background-color: theme-color(forest);
+    background-color: theme-color(dark);
     transition: all 500ms transition(out);
   }
 
@@ -170,7 +142,6 @@ export default {
     align-items: center;
     width: 100%;
     height: 100%;
-    // cursor: none;
     // border: solid 1px red;
   }
 
@@ -190,117 +161,12 @@ export default {
     transform: translate3d(0, rem(100px), 0);
   }
 
-  body.theme-forest & {
-    background: theme-color(forest);
+  body.theme-dark & {
+    background: theme-color(dark);
   }
 
-  body.theme-desert & {
-    background: theme-color(desert);
-  }
-
-  body.theme-ocean & {
-    background: theme-color(ocean);
-  }
-}
-
-.cursor {
-  position: fixed;
-  z-index: 99999999999999;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-
-  &.medium {
-    mix-blend-mode: difference;
-  }
-
-  p {
-    margin: 0;
-    opacity: 0;
-  }
-
-  &__arrow {
-    width: 30px;
-    height: 30px;
-    background-repeat: no-repeat;
-    opacity: 0;
-    transition: transform 250ms ease-in;
-
-    &--left {
-      background-image: img-path('arrow-prev.svg');
-      background-position: left;
-      transform: translate3d(rem(50px), 0, 0);
-    }
-
-    &--right {
-      background-image: img-path('arrow-next.svg');
-      background-position: right;
-      transform: translate3d(rem(-50px), 0, 0);
-    }
-  }
-
-  &--active & {
-    &__arrow {
-      opacity: 1;
-      transition: transform 250ms ease-in;
-
-      &--left {
-        transform: translate3d(0, 0, 0);
-      }
-
-      &--right {
-        transform: translate3d(0, 0, 0);
-      }
-    }
-  }
-
-  &--disabled & {
-    &__arrow {
-      transition: transform 250ms ease-out;
-
-      &--left {
-        transform: translate3d(50px, 0, 0);
-      }
-
-      &--right {
-        transform: translate3d(-50px, 0, 0);
-      }
-    }
-  }
-
-  &__wrapper {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 200px;
-    height: 100px;
-  }
-
-  &__inner {
-    width: rem(30px);
-    height: rem(30px);
-    background: #fff;
-    border-radius: 50%;
-    transition: 200ms (ease-in-out);
-
-    &--medium {
-      width: rem(60px);
-      height: rem(60px);
-    }
-
-    &--large {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: rem(100px);
-      height: rem(100px);
-      text-align: center;
-
-      p {
-        opacity: 1;
-        transition-delay: 250ms;
-      }
-    }
+  body.theme-light & {
+    background: theme-color(light);
   }
 }
 
@@ -360,17 +226,16 @@ export default {
 
     &--prev {
       background-image: img-path('arrow-prev.svg');
-
-      &:hover {
-        opacity: 1;
-        transform: scale(1.2);
-      }
     }
 
     &--next {
       background-image: img-path('arrow-next.svg');
+    }
 
+    &--prev,
+    &--next {
       &:hover {
+        cursor: pointer;
         opacity: 1;
         transform: scale(1.2);
       }

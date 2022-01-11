@@ -1,12 +1,13 @@
 <template>
   <div>
-    <LayoutHeader />
-    <LayoutCustomCursor />
-    <div id="transition-wrapper" ref="wrapper" class="transition" />
+    <section>
+      <LayoutHeader />
+      <div id="transition-wrapper" ref="wrapper" class="transition" />
 
-    <main>
-      <Nuxt />
-    </main>
+      <main>
+        <Nuxt />
+      </main>
+    </section>
   </div>
 </template>
 
