@@ -9,7 +9,7 @@ $line-height-base: 1.65;
 
 // Body
 
-$body-bg: theme-color(light);
+// $body-bg: theme-color(light);
 $body-color: theme-color(dark);
 $body-letter-spacing: .01em;
 $text-muted: rgba($body-color, .6);
@@ -22,14 +22,14 @@ $link-hover-color: $link-color;
 $link-hover-decoration: underline;
 
 // Default font stack (used on <body>)
-$font-family-sans-serif: 'SF Pro', 'Helvetica Neue', helvetica, arial, sans-serif;
+$font-family-sans-serif: 'Cousine', courier, monospace;
 
 // Headings
 $headings-margin-bottom: .5em;
-$headings-font-family: 'Kaisei Tokumin',  times, 'Times New Roman', serif;
+$headings-font-family: 'Druk Wide Bold', helvetica, arial, sans-serif;
 $headings-font-weight: 700;
 $headings-line-height: 1;
-$headings-letter-spacing: .08em;
+$headings-letter-spacing: .01em;
 $headings-text-transform: lowercase;
 $headings-color: theme-color(dark);
 

@@ -1,8 +1,9 @@
-import { Swiper, Navigation, Pagination, Mousewheel } from 'swiper'
+import { Swiper, Navigation, Pagination, Autoplay, Mousewheel } from 'swiper'
 
 export {
   Navigation,
   Pagination,
+  Autoplay,
   Swiper,
   Mousewheel
 }

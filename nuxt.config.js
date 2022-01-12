@@ -1,3 +1,6 @@
+import env from './config/environment.js'
+import plugins from './config/plugins.js'
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -32,12 +35,8 @@ export default {
     '~/assets/scss/main.scss',
     'swiper/swiper.min.css'
   ],
-
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    { src: '~/plugins/swiper.js', mode: 'client' }
-  ],
-
+  plugins,
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -51,6 +50,8 @@ export default {
     // style resources
     '@nuxtjs/style-resources'
   ],
+
+  env,
 
   styleResources: {
     scss: [

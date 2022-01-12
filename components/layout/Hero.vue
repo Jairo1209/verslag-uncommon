@@ -1,9 +1,16 @@
 <template>
   <div class="hero">
     <h1
-      class="hero__title"
+      v-if="$route.params.slug"
+      class="hero__title h1"
     >
       {{ $route.params.slug }}
+    </h1>
+    <h1
+      v-else
+      class="hero__title h1"
+    >
+      {{ titleName }}
     </h1>
     <img
       :src="src"
@@ -23,22 +30,14 @@ export default {
     src: {
       type: String,
       required: true
-    }
-  },
-  data () {
-    return {
+    },
+    titleName: {
+      type: String,
+      default: ''
     }
   },
 
   mounted () {
-    gsap.fromTo('.hero__img', {
-      scale: 1
-    },
-    {
-      scale: 0.98,
-      duration: 1,
-      delay: 1
-    })
     gsap.fromTo('.hero__title', {
       opacity: 0,
       y: 100
@@ -52,8 +51,6 @@ export default {
     const hero = gsap.timeline({
       scrollTrigger: {
         trigger: '.hero',
-        pin: true,
-        anticipatePin: 1,
         start: 'top top',
         end: '+=800',
         scrub: true
@@ -65,7 +62,7 @@ export default {
         trigger: this.$el,
         start: 'top 1',
         end: 'bottom 1',
-        scrub: 2
+        scrub: 1
       }
     }, 1)
     timeline.fromTo('.hero__title', {
@@ -107,7 +104,7 @@ export default {
     position: absolute;
     margin: 0;
     color: theme-color(light);
-    text-transform: uppercase;
+    text-transform: lowercase;
   }
 }
 </style>

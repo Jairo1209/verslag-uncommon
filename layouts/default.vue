@@ -3,10 +3,9 @@
     <section>
       <LayoutHeader />
       <div id="transition-wrapper" ref="wrapper" class="transition" />
-
-      <main>
-        <Nuxt />
-      </main>
+      <!-- <main> -->
+      <Nuxt />
+    <!-- </main> -->
     </section>
   </div>
 </template>
@@ -25,19 +24,16 @@ export default {
           this.$refs.wrapper.removeChild(this.$refs.wrapper.querySelector('img'))
         }, 500)
       }
-    },
-    $route (params, app) {
-      this.$store.commit('setCursorEnable', false)
     }
   }
 }
 </script>
 
 <style lang="scss">
-main {
-  position: relative;
-  z-index: 1;
-}
+// main {
+//   position: relative;
+//   z-index: 1;
+// }
 
 .transition {
   position: fixed;
