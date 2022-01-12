@@ -7,12 +7,7 @@ $colors: (
   // pink: #f9e8d5,
   black: var(--color-black),
   white: var(--color-white),
-  darkblue: #002024,
-  blue: #a8dadc,
-  darksand: #cb997e,
-  sand: #e7dfc6,
-  darkgreen: #1b251d,
-  green: #a5a58d,
+  darkblue: #2c3af5,
   // lightgray: #ceceee,
   // gray: #d8d8d8,
 );
@@ -24,12 +19,7 @@ $theme-colors: (
   // tertiary: color(pink),
   dark: var(--color-black),
   light: var(--color-white),
-  ocean: color(darkblue),
-  ocean-100: color(blue),
-  desert: color(sand),
-  desert-100: color(darksand),
-  forest: color(darkgreen),
-  forest-100: color(green),
+  primary: color(darkblue),
 );
 
 // $grays: (

@@ -16,6 +16,7 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    'no-unused-vars': 0
+    'no-unused-vars': 0,
+    'vue/no-v-html': 0
   }
 }
