@@ -2,15 +2,6 @@
   <Component
     :is="htmlTag"
     class="marquee"
-    :style="`--animation-speed: ${speed}s`"
-    :class="[
-      className,
-      {
-        'marquee--padding' : withBorders,
-        'marquee--reversed' : reversed,
-        'marquee--with-borders': withBorders
-      }
-    ]"
   >
     <div class="marquee__wrapper">
       <div class="marquee__inner">
@@ -28,7 +19,6 @@
 </template>
 
 <script>
-const MODIFIERS = ['primary', 'light']
 export default {
   name: 'Marquee',
   props: {
@@ -40,11 +30,6 @@ export default {
       type: Number,
       default: 50
     },
-    textModifier: {
-      type: String,
-      default: 'light',
-      validator: v => MODIFIERS.includes(v)
-    },
     htmlTag: {
       type: String,
       default: 'div'
@@ -52,11 +37,6 @@ export default {
     reversed: {
       type: Boolean,
       default: false
-    }
-  },
-  computed: {
-    className () {
-      return `marquee--${this.textModifier}`
     }
   }
 }
@@ -69,9 +49,10 @@ export default {
   position: relative;
   display: flex;
   width: 100%;
+  padding: 25px 0;
   margin: 0;
   overflow: hidden;
-  color: theme-color(primary);
+  color: theme-color(light);
   text-transform: lowercase;
   pointer-events: none;
 
@@ -90,52 +71,6 @@ export default {
   &__inner-item {
     &::after {
       content: '\00a0';
-    }
-  }
-
-  &--with-borders {
-    &::before,
-    &::after {
-      position: absolute;
-      right: 0;
-      left: 0;
-      width: 80%;
-      max-width: rem(map-get($container-max-widths, md));
-      height: rem(2px);
-      margin: 0 auto;
-      content: '';
-      background: theme-color(light);
-
-      @include media-breakpoint-up(md) {
-        width: calc(100% - #{rem(60px)});
-      }
-    }
-
-    &::before {
-      top: 0;
-    }
-
-    &::after {
-      bottom: 0;
-    }
-  }
-
-  &--padding {
-    padding-top: rem(40px);
-    padding-bottom: rem(40px);
-  }
-
-  &--light {
-    color: theme-color(light);
-  }
-
-  &--primary {
-    color: theme-color(primary);
-  }
-
-  &--reversed {
-    .marquee__inner {
-      animation: marqueeAnimation 50s linear infinite reverse;
     }
   }
 }

@@ -10,7 +10,7 @@
       v-else
       class="hero__title h1"
     >
-      home
+      {{ titleName }}
     </h1>
     <img
       :src="src"
@@ -30,22 +30,14 @@ export default {
     src: {
       type: String,
       required: true
-    }
-  },
-  data () {
-    return {
+    },
+    titleName: {
+      type: String,
+      default: ''
     }
   },
 
   mounted () {
-    gsap.fromTo('.hero__img', {
-      scale: 1
-    },
-    {
-      scale: 0.98,
-      duration: 1,
-      delay: 1
-    })
     gsap.fromTo('.hero__title', {
       opacity: 0,
       y: 100

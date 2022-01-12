@@ -1,3 +1,4 @@
+import env from './config/environment.js'
 import plugins from './config/plugins.js'
 
 export default {
@@ -49,6 +50,8 @@ export default {
     // style resources
     '@nuxtjs/style-resources'
   ],
+
+  env,
 
   styleResources: {
     scss: [
