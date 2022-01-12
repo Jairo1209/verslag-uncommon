@@ -1,13 +1,6 @@
 <template>
   <div class="hero">
     <h1
-      v-if="$route.params.slug"
-      class="hero__title h1"
-    >
-      {{ $route.params.slug }}
-    </h1>
-    <h1
-      v-else
       class="hero__title h1"
     >
       {{ titleName }}

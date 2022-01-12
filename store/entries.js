@@ -20,12 +20,10 @@ const fields = {
 
 export const state = () => ({
   data: {
-    home: { ...fields },
-    slot: { ...fields },
+    homePage: { ...fields },
+    slotPage: { ...fields },
     bpvPage: { ...fields },
-    informationPage: { ...fields },
-    footer: { ...fields },
-    productOverview: { ...fields }
+    bpvOverviewPage: { ...fields }
   }
 })
 
@@ -40,8 +38,7 @@ export const mutations = {
   },
   setSlug (state, payload) {
     state.data[payload.key].slugEntry = {
-      fields: payload.fields,
-      product: payload.product
+      fields: payload.fields
     }
   },
   setError (state, payload) {
@@ -124,41 +121,13 @@ export const actions = {
         ...mergedOptions
       })
 
-      const productId = items[0].fields.shopifyProductID ? items[0].fields.shopifyProductID : null
-
-      const productsQuery = this.$shopify.graphQLClient.query((root) => {
-        root.add('node', { args: { id: productId } }, (node) => {
-          node.add('id')
-          node.addInlineFragmentOn('Product', (product) => {
-            product.add('availableForSale')
-            product.add('title')
-            product.add('id')
-            product.addConnection('variants', { args: { first: 10 } }, (variant) => {
-              variant.add('available')
-              variant.add('availableForSale')
-              variant.add('compareAtPrice')
-              variant.add('currentlyNotInStock')
-              variant.add('id')
-              variant.add('price')
-              variant.add('quantityAvailable')
-              variant.add('sku')
-              variant.add('title')
-              variant.add('weight')
-              variant.add('weightUnit')
-            })
-          })
-        })
-      })
-
-      const product = data.fetchShopify ? await this.$shopify.graphQLClient.send(productsQuery) : null
-
       if (!items.length) {
         commit('setSlug', {})
 
         return
       }
 
-      commit('setSlug', { key: data.content_type, fields: items[0].fields, product: product ? product.model.node : {} })
+      commit('setSlug', { key: data.content_type, fields: items[0].fields })
     } catch (e) {
       commit('setError', { key: data.content_type, error: { statusCode: 404, message: 'Could not fetch entries.' } })
     }

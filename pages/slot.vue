@@ -52,13 +52,11 @@
 </template>
 
 <script>
-const slugs = ['slot']
-
 export default {
 
   async fetch ({ store }) {
     await store.dispatch('entries/getEntry', {
-      name: 'slot',
+      name: 'slotPage',
       id: '6LfXnDv5zPq4fwRmpO313q'
     })
   },
@@ -73,14 +71,12 @@ export default {
 
   computed: {
     entry () {
-      return this.$store.state.entries.data.slot.entry
+      return this.$store.state.entries.data.slotPage.entry
     }
   },
 
   mounted () {
     this.accordeon()
-    console.log(this.entry)
-    console.log(this.entry.heroImg.fields.file.url)
   },
 
   methods: {
