@@ -86,35 +86,6 @@ export default {
   },
 
   methods: {
-    // onRouteChange ($event, url) {
-    //   const el = $event.currentTarget
-    //   const image = el.parentNode.querySelector('.img')
-    //   const wrapper = document.getElementById('transition-wrapper')
-    //   const bounds = el.getBoundingClientRect()
-    //
-    //   const windowHeight = window.innerHeight
-    //   const windowWidth = window.innerWidth
-    //
-    //   const x = bounds.width / windowWidth
-    //   const y = bounds.height / windowHeight
-    //
-    //   wrapper.appendChild(image)
-    //
-    //   this.$store.commit('removeTransition', false)
-    //   this.$gsap.fromTo(wrapper, {
-    //     scaleY: y,
-    //     scaleX: x
-    //   }, {
-    //     scaleY: 1,
-    //     scaleX: 1,
-    //     delay: 0.3,
-    //     ease: 'power4.out',
-    //     duration: 1.4,
-    //     onComplete: () => {
-    //       this.$router.push(url)
-    //     }
-    //   })
-    // },
     activeSlideClass (key, slides) {
       const bodyClass = slides[key].dataset.bodyClass
       document.body.removeAttribute('class')

@@ -10,8 +10,6 @@
             ref="button"
             class="menu__link"
             :to="item.fields.menuLink"
-            @mouseover.native="mouseHoverAnimation(key)"
-            @mouseleave.native="mouseOutAnimation(key)"
           >
             {{ item.fields.name }}
             <span class="menu__line" />
@@ -32,12 +30,6 @@
 
 <script>
 import { gsap } from 'gsap'
-
-import homeImg from '~/assets/img/home.jpg'
-import bpv1Img from '~/assets/img/bpv-1.jpg'
-import bpv2Img from '~/assets/img/bpv-2.jpg'
-import slotImg from '~/assets/img/slot.jpg'
-
 import { distance } from '~/utils'
 
 export default {
@@ -49,13 +41,7 @@ export default {
       mouse: {
         x: 0,
         y: 0
-      },
-      menuItems: [
-        { name: 'Home', link: '/home', img: homeImg, isActive: false, pos: { x: 0, y: 0 } },
-        { name: 'Bpv-1', link: '/bpv/uncommon-apparel', img: bpv1Img, isActive: false, pos: { x: 0, y: 0 } },
-        { name: 'Bpv-2', link: '/bpv/fitlab', img: bpv2Img, isActive: false, pos: { x: 0, y: 0 } },
-        { name: 'slot', link: '/slot', img: slotImg, isActive: false, pos: { x: 0, y: 0 } }
-      ]
+      }
     }
   },
 
@@ -97,57 +83,14 @@ export default {
         stagger: 0.2,
         ease: 'power4.out'
       }, 0.3)
-
-    document.addEventListener('mousemove', this.getMousePos)
-
-    this.onResize()
-    window.addEventListener('resize', this.onResize)
-
-    gsap.ticker.add(this.render)
   },
 
   // hier staan functies / methods in die je aan kunt roepen in je hele component
   methods: {
-    getMousePos ({ x, y }) {
-      this.mouse.x = x
-      this.mouse.y = y
-    },
-    onResize () {
-      this.bounds = []
-
-      this.menuItems.forEach((item, key) => {
-        const bounds = this.$refs.button[key].$el.getBoundingClientRect()
-
-        this.bounds.push(bounds)
-      })
-    },
-    render () {
-      this.menuItems.forEach((item, key) => {
-        const distanceMouseButton = distance(this.mouse.x + window.scrollX, this.mouse.y + window.scrollY, this.bounds[key].left + this.bounds[key].width / 2, this.bounds[key].top + this.bounds[key].height / 2)
-
-        let x = 0
-        let y = 0
-
-        if (distanceMouseButton < this.bounds[key].width * 0.7) {
-          x = (this.mouse.x + window.scrollX - (this.bounds[key].left + this.bounds[key].width / 2)) * 0.3
-          y = (this.mouse.y + window.scrollY - (this.bounds[key].top + this.bounds[key].height / 2)) * 0.3
-        }
-
-        this.menuItems[key].pos.x = x
-        this.menuItems[key].pos.y = y
-      })
-    },
     playAnimation () {
       this.animation.restart()
-    },
-    mouseHoverAnimation (key) {
-      // this.menuItems[key].isActive = true
-
-    },
-    mouseOutAnimation (key) {
-      // this.$store.commit('setmenuItemsStore', this.entry.menuItem[key].fields.isActive = false)
-      // console.log(this.entry.menuItem[key].fields.isActive)
     }
+
   }
 }
 </script>
