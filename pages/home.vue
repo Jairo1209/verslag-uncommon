@@ -15,10 +15,15 @@
       <section class="section-inset-y">
         <div class="row">
           <div class="centered-box col-md-10 offset-md-1">
-            <h3 class="centered-box__title h4">
-              {{ entry.infoBlockTitle }}
-            </h3>
-            <div class="centered-box__body" v-html="$md.render(entry.infoBlockBody)" />
+            <animations-fade-in>
+              <h3 class="centered-box__title h4">
+                {{ entry.infoBlockTitle }}
+              </h3>
+            </animations-fade-in>
+
+            <animations-fade-in>
+              <div class="centered-box__body" v-html="$md.render(entry.infoBlockBody)" />
+            </animations-fade-in>
           </div>
         </div>
       </section>
@@ -76,8 +81,8 @@
               {{ entry.organogramTitle }}
             </h3>
           </div>
-          <div class="col-md-8 offset-md-2 mt-5">
-            <BaseButton btn-name="Bekijk Fullscreen" />
+          <div class="col-md-8 offset-md-2 mt-5 d-flex justify-content-center">
+            <BaseButton is-light btn-name="Bekijk Fullscreen" />
           </div>
         </div>
       </section>
@@ -106,10 +111,6 @@ export default {
     entry () {
       return this.$store.state.entries.data.homePage.entry
     }
-  },
-
-  mounted () {
-    console.log(this.entry)
   }
 }
 </script>

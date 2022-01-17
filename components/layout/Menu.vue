@@ -5,23 +5,23 @@
   >
     <nav class="menu__nav">
       <ul class="list-unstyled menu__list">
-        <li v-for="(item, key) in menuItems" :key="key" class="menu__item">
+        <li v-for="(item, key) in entry.menuItem" :key="key" class="menu__item">
           <NuxtLink
             ref="button"
             class="menu__link"
-            :to="item.link"
-            @mouseover.native="mouseHoverAnimation(key, item.class), linkHover()"
-            @mouseleave.native="mouseOutAnimation(key, item.class), linkHoverOut()"
+            :to="item.fields.menuLink"
+            @mouseover.native="mouseHoverAnimation(key)"
+            @mouseleave.native="mouseOutAnimation(key)"
           >
-            {{ item.name }}
+            {{ item.fields.name }}
             <span class="menu__line" />
           </NuxtLink>
           <div
             class="preview-img"
-            :class="{ 'preview-img--is-shown' : item.isActive }"
+            :class="{ 'preview-img--is-shown' : item.fields.isActive }"
           >
-            <div class="preview-img__inner" :style="`transform: translate3d(${item.pos.x}px, ${item.pos.y}px, 0)`">
-              <img :src="item.img">
+            <div class="preview-img__inner" :style="`transform: translate3d(${item.fields.x}px, ${item.fields.y}px, 0)`">
+              <img :src="item.fields.menuImg.fields.file.url">
             </div>
           </div>
         </li>
@@ -51,10 +51,10 @@ export default {
         y: 0
       },
       menuItems: [
-        { name: 'Home', link: '/home', img: homeImg, isActive: false, class: 'theme-dark', pos: { x: 0, y: 0 } },
-        { name: 'Bpv-1', link: '/bpv-1', img: bpv1Img, isActive: false, class: 'theme-light', pos: { x: 0, y: 0 } },
-        { name: 'Bpv-2', link: '/bpv-2', img: bpv2Img, isActive: false, class: 'theme-light', pos: { x: 0, y: 0 } },
-        { name: 'Bpv-2', link: '/slot', img: slotImg, isActive: false, class: 'theme-dark', pos: { x: 0, y: 0 } }
+        { name: 'Home', link: '/home', img: homeImg, isActive: false, pos: { x: 0, y: 0 } },
+        { name: 'Bpv-1', link: '/bpv/uncommon-apparel', img: bpv1Img, isActive: false, pos: { x: 0, y: 0 } },
+        { name: 'Bpv-2', link: '/bpv/fitlab', img: bpv2Img, isActive: false, pos: { x: 0, y: 0 } },
+        { name: 'slot', link: '/slot', img: slotImg, isActive: false, pos: { x: 0, y: 0 } }
       ]
     }
   },
@@ -63,6 +63,12 @@ export default {
   computed: {
     menuIsOpen () {
       return this.$store.state.menuIsOpen
+    },
+    menuItemsInStore () {
+      return this.$store.state.menuItemsStore
+    },
+    entry () {
+      return this.$store.state.entries.data.menu.entry
     }
   },
 
@@ -134,23 +140,13 @@ export default {
     playAnimation () {
       this.animation.restart()
     },
-    mouseHoverAnimation (key, themeClass) {
-      if (this.menuIsOpen) {
-        document.body.classList.add(themeClass)
-      }
-      this.menuItems[key].isActive = true
+    mouseHoverAnimation (key) {
+      // this.menuItems[key].isActive = true
+
     },
-    mouseOutAnimation (key, themeClass) {
-      if (this.menuIsOpen) {
-        document.body.classList.remove(themeClass)
-      }
-      this.menuItems[key].isActive = false
-    },
-    linkHover () {
-      this.$store.commit('setCursorMedium', true)
-    },
-    linkHoverOut () {
-      this.$store.commit('setCursorMedium', false)
+    mouseOutAnimation (key) {
+      // this.$store.commit('setmenuItemsStore', this.entry.menuItem[key].fields.isActive = false)
+      // console.log(this.entry.menuItem[key].fields.isActive)
     }
   }
 }

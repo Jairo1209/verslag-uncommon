@@ -20,9 +20,11 @@ const fields = {
 
 export const state = () => ({
   data: {
+    binnenkomstPagina: { ...fields },
     homePage: { ...fields },
     slotPage: { ...fields },
     bpvPage: { ...fields },
+    menu: { ...fields },
     bpvOverviewPage: { ...fields }
   }
 })
