@@ -1,6 +1,7 @@
 <template>
   <div>
     <LayoutHero
+      v-if="entry.heroImg.fields.file.url"
       :src="`${entry.heroImg.fields.file.url}?fit=fill&w=2000&h=1500&q=80&fm=jpg&fl=progressive`"
       :title-name="entry.title"
     />
@@ -9,12 +10,12 @@
         <div class="row">
           <div class="centered-box col-md-10 offset-md-1">
             <animations-fade-in>
-              <h3 class="centered-box__title h4">
+              <h3 v-if="entry.infoBlockTitle" class="centered-box__title h4">
                 {{ entry.infoBlockTitle }}
               </h3>
             </animations-fade-in>
             <animations-fade-in>
-              <p class="centered-box__body">
+              <p v-if="entry.infoBlockBody" class="centered-box__body">
                 {{ entry.infoBlockBody }}
               </p>
             </animations-fade-in>
@@ -31,7 +32,7 @@
             >
               <animations-fade-in>
                 <button ref="accordion" class="accordion">
-                  <h6 class="h6">
+                  <h6 v-if="item.fields.accordeonTitle" class="h6">
                     {{ item.fields.accordeonTitle }}
                   </h6>
 
@@ -40,7 +41,7 @@
                     <span class="cross-line" />
                   </div>
                 </button>
-                <div ref="panel" class="panel">
+                <div v-if="item.fields.accordeonBody" ref="panel" class="panel">
                   <p>{{ item.fields.accordeonBody }}</p>
                 </div>
               </animations-fade-in>
@@ -52,12 +53,12 @@
         <div class="row">
           <div class="centered-box col-md-10 offset-md-1">
             <animations-fade-in>
-              <h3 class="centered-box__title h4">
+              <h3 v-if="entry.infoBlockTitleSecond" class="centered-box__title h4">
                 {{ entry.infoBlockTitleSecond }}
               </h3>
             </animations-fade-in>
             <animations-fade-in>
-              <p class="centered-box__body">
+              <p v-if="entry.infoBlockBodySecond" class="centered-box__body">
                 {{ entry.infoBlockBodySecond }}
               </p>
             </animations-fade-in>
