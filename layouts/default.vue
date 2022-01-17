@@ -5,35 +5,48 @@
       <div id="transition-wrapper" ref="wrapper" class="transition" />
       <!-- <main> -->
       <Nuxt />
-    <!-- </main> -->
+      <!-- </main> -->
+      <LayoutPreloader />
+      <LayoutFooter />
     </section>
   </div>
 </template>
 
 <script>
 export default {
-  computed: {
-    transitionRemoved () {
-      return this.$store.state.transitionRemoved
-    }
-  },
-  watch: {
-    transitionRemoved (isRemoved) {
-      if (isRemoved) {
-        setTimeout(() => {
-          this.$refs.wrapper.removeChild(this.$refs.wrapper.querySelector('img'))
-        }, 500)
-      }
-    }
-  }
+  // computed: {
+  //   transitionRemoved () {
+  //     return this.$store.state.transitionRemoved
+  //   }
+  // },
+  //
+  // watch: {
+  //   transitionRemoved (isRemoved) {
+  //     if (isRemoved) {
+  //       setTimeout(() => {
+  //         this.$refs.wrapper.removeChild(this.$refs.wrapper.querySelector('img'))
+  //       }, 500)
+  //     }
+  //   }
+  // }
 }
 </script>
 
 <style lang="scss">
-// main {
-//   position: relative;
-//   z-index: 1;
-// }
+
+img {
+  user-select: none;
+}
+
+::-moz-selection { /* Code for Firefox */
+  color: theme-color(light);
+  background: theme-color(primary);
+}
+
+::selection {
+  color: theme-color(light);
+  background: theme-color(primary);
+}
 
 .transition {
   position: fixed;

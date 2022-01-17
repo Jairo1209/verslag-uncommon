@@ -9,5 +9,6 @@
 
 export default [
   { src: '~/plugins/webfontloader.js', mode: 'client' },
+  { src: '~/plugins/gsap.js', mode: 'client' },
   { src: '~/plugins/swiper.js', mode: 'client' }
 ]

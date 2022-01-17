@@ -10,7 +10,8 @@ export const state = () => ({
   cursorEnable: false,
   sizeMedium: false,
   sizeLarge: false,
-  titleActive: false
+  titleActive: false,
+  menuItemsStore: []
 })
 
 export const mutations = {
@@ -37,5 +38,8 @@ export const mutations = {
   },
   setTitleActive (state, payload) {
     state.titleActive = payload
+  },
+  setmenuItemsStore (state, payload) {
+    state.menuItemsStore = payload
   }
 }

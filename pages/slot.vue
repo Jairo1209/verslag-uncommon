@@ -8,12 +8,16 @@
       <section class="section-inset-y">
         <div class="row">
           <div class="centered-box col-md-10 offset-md-1">
-            <h3 class="centered-box__title h4">
-              {{ entry.infoBlockTitle }}
-            </h3>
-            <p class="centered-box__body">
-              {{ entry.infoBlockBody }}
-            </p>
+            <animations-fade-in>
+              <h3 class="centered-box__title h4">
+                {{ entry.infoBlockTitle }}
+              </h3>
+            </animations-fade-in>
+            <animations-fade-in>
+              <p class="centered-box__body">
+                {{ entry.infoBlockBody }}
+              </p>
+            </animations-fade-in>
           </div>
         </div>
       </section>
@@ -25,12 +29,21 @@
               :key="key"
               class="accordeon-item"
             >
-              <button class="accordion">
-                <span class="h6">{{ item.fields.accordeonTitle }}</span>
-              </button>
-              <div class="panel">
-                <p>{{ item.fields.accordeonBody }}</p>
-              </div>
+              <animations-fade-in>
+                <button ref="accordion" class="accordion">
+                  <h6 class="h6">
+                    {{ item.fields.accordeonTitle }}
+                  </h6>
+
+                  <div class="accordion__cross">
+                    <span class="cross-line" />
+                    <span class="cross-line" />
+                  </div>
+                </button>
+                <div ref="panel" class="panel">
+                  <p>{{ item.fields.accordeonBody }}</p>
+                </div>
+              </animations-fade-in>
             </div>
           </div>
         </div>
@@ -38,12 +51,16 @@
       <section class="section-inset-b">
         <div class="row">
           <div class="centered-box col-md-10 offset-md-1">
-            <h3 class="centered-box__title h4">
-              {{ entry.infoBlockTitleSecond }}
-            </h3>
-            <p class="centered-box__body">
-              {{ entry.infoBlockBodySecond }}
-            </p>
+            <animations-fade-in>
+              <h3 class="centered-box__title h4">
+                {{ entry.infoBlockTitleSecond }}
+              </h3>
+            </animations-fade-in>
+            <animations-fade-in>
+              <p class="centered-box__body">
+                {{ entry.infoBlockBodySecond }}
+              </p>
+            </animations-fade-in>
           </div>
         </div>
       </section>
@@ -81,18 +98,19 @@ export default {
 
   methods: {
     accordeon () {
-      const acc = document.getElementsByClassName('accordion')
+      const acc = this.$refs.accordion
       let i
       for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener('click', function () {
-          this.classList.toggle('active')
-          const panel = this.nextElementSibling
-          if (panel.style.display === 'block') {
-            panel.style.display = 'none'
-          } else {
-            panel.style.display = 'block'
-          }
-        })
+        acc[i].addEventListener('click',
+          function () {
+            this.classList.toggle('active')
+            const panel = this.nextElementSibling
+            if (panel.classList.contains('active')) {
+              panel.classList.remove('active')
+            } else {
+              panel.classList.add('active')
+            }
+          })
       }
     }
   }
@@ -101,6 +119,8 @@ export default {
 
 <style lang="scss" scoped>
 .accordion {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   padding: 18px;
   font-size: 15px;
@@ -109,22 +129,56 @@ export default {
   cursor: pointer;
   border: none;
   outline: none;
-  transition: .4s;
+
+  &__cross {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+  }
 
   span {
+    display: block;
+    width: 100%;
+    height: rem(2px);
+    background-color: theme-color(light);
+    transition: opacity .1s ease;
+
+    &:nth-of-type(1) {
+      position: absolute;
+      top: 50%;
+    }
+
+    &:nth-of-type(2) {
+      position: absolute;
+      top: 50%;
+      transform: rotate(90deg);
+    }
+  }
+
+  h6 {
     color: white;
+  }
+
+  &.active {
+    span {
+      &:nth-of-type(2) {
+        opacity: 0;
+      }
+    }
   }
 }
 
-.active,
-.accordion:hover {
-  // background-color: #ccc;
-}
-
 .panel {
-  display: none;
+  max-height: 0;
   padding: 0 18px;
   overflow: hidden;
+  transition: max-height .5s cubic-bezier(0, 1, 0, 1);
+}
+
+.active {
+  max-height: 800px;
+  transition: max-height 1s ease-in-out;
 }
 
 .centered-box {

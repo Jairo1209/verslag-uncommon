@@ -81,10 +81,6 @@ export default {
     background: theme-color(dark);
   }
 
-  body.theme-light & {
-    background: theme-color(light);
-  }
-
   &__img {
     z-index: -1;
     width: 100%;

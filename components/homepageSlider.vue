@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import { gsap } from 'gsap'
 import { Swiper, Pagination, Autoplay } from 'swiper'
 import imgOne from '~/assets/img/officeOne.jpg'
 import imgTwo from '~/assets/img/officeTwo.jpg'
@@ -45,6 +44,8 @@ export default {
       autoplay: true,
       spaceBetween: 50,
       centeredSlides: true,
+      speed: 1300,
+      allowTouchMove: false,
       loop: true,
       breakpoints: {
         640: {
@@ -67,6 +68,7 @@ export default {
 <style lang="scss" scoped>
 .slider {
   overflow: hidden;
+  pointer-events: none;
 }
 
 .swiper-slide {
