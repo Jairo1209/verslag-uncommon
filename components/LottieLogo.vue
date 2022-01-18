@@ -24,7 +24,7 @@ export default {
 <style lang="scss" scoped>
   .lottie {
     width: 50%;
-    min-width: 250px;
+    min-width: 200px;
   }
 
 </style>

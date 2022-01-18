@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container section-inset-y">
     <h1>BPV</h1>
   </div>
 </template>
@@ -17,10 +17,6 @@ export default {
     entry () {
       return this.$store.state.entries.data.bpvOverviewPage.entry
     }
-  },
-
-  mounted () {
-    console.log(this.entry)
   }
 }
 </script>

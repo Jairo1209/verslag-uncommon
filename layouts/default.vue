@@ -6,7 +6,7 @@
       <!-- <main> -->
       <Nuxt />
       <!-- </main> -->
-      <!-- <LayoutPreloader /> -->
+      <LayoutPreloader />
       <LayoutFooter />
     </section>
   </div>

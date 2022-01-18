@@ -2,18 +2,7 @@
   <div class="slider slider__wrapper">
     <div ref="swiper" class="swiper">
       <div class="swiper-wrapper">
-        <div
-          v-for="(item, key) in sliderItems"
-          :key="key"
-          :data-body-class="item.class"
-          class="swiper-slide"
-        >
-          <div class="swiper-slide__img">
-            <div class="swiper-slide__inner">
-              <img class="img" :src="item.img" alt="">
-            </div>
-          </div>
-        </div>
+        <slot />
       </div>
     </div>
   </div>
@@ -21,21 +10,9 @@
 
 <script>
 import { Swiper, Pagination, Autoplay } from 'swiper'
-import imgOne from '~/assets/img/officeOne.jpg'
-import imgTwo from '~/assets/img/officeTwo.jpg'
-import imgThree from '~/assets/img/officeThree.jpg'
 export default {
   name: 'HomepageSlider',
 
-  data () {
-    return {
-      sliderItems: [
-        { img: imgOne },
-        { img: imgTwo },
-        { img: imgThree }
-      ]
-    }
-  },
   mounted () {
     // const Swiper = swiper.Swiper
     Swiper.use([Pagination, Autoplay])

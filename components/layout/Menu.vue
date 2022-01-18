@@ -5,21 +5,21 @@
   >
     <nav class="menu__nav">
       <ul class="list-unstyled menu__list">
-        <li v-for="(item, key) in entry.menuItem" :key="key" class="menu__item">
+        <li v-for="(item, key) in entry.menuItem" :key="key" class="menu__item" @mouseover="isShown(key)" @mouseleave="notShown(key)">
           <NuxtLink
             ref="button"
+            :key="key"
             class="menu__link"
             :to="item.fields.menuLink"
           >
             {{ item.fields.name }}
-            <span class="menu__line" />
           </NuxtLink>
           <div
+            ref="preImg"
             class="preview-img"
-            :class="{ 'preview-img--is-shown' : item.fields.isActive }"
           >
             <div class="preview-img__inner" :style="`transform: translate3d(${item.fields.x}px, ${item.fields.y}px, 0)`">
-              <img :src="item.fields.menuImg.fields.file.url">
+              <img :src="`${item.fields.menuImg.fields.file.url}?fit=fill&w=2000&h=1500&q=80&fm=jpg&fl=progressive`">
             </div>
           </div>
         </li>
@@ -89,8 +89,13 @@ export default {
   methods: {
     playAnimation () {
       this.animation.restart()
+    },
+    isShown (key) {
+      this.$refs.preImg[key].classList.add('preview-img--is-shown')
+    },
+    notShown (key) {
+      this.$refs.preImg[key].classList.remove('preview-img--is-shown')
     }
-
   }
 }
 </script>
@@ -103,19 +108,9 @@ export default {
   z-index: 1;
   width: 100%;
   height: 100vh;
-  // cursor: none;
   visibility: hidden;
   background: theme-color(dark);
   opacity: 0;
-  transition: all 500ms transition(out);
-
-  body.theme-dark & {
-    background: theme-color(dark);
-  }
-
-  body.theme-light & {
-    background: theme-color(light);
-  }
 
   &.is-open {
     visibility: visible;
@@ -144,31 +139,18 @@ export default {
     width: 100%;
     height: calc(100% / 5);
     min-height: rem(100px);
-    text-transform: uppercase;
+    text-transform: lowercase;
 
     @include get-font-size(menu);
     @include headingstyles();
-  }
-
-  &__line {
-    position: absolute;
-    bottom: 0;
-    display: block;
-    width: 100%;
-    height: rem(2px);
-    background-color: theme-color(light);
-    opacity: 0;
   }
 
   &__link {
     position: relative;
     display: block;
     color: theme-color(light);
+    text-align: center;
     cursor: pointer;
-
-    &.nuxt-link-active .menu__line {
-      opacity: 1;
-    }
   }
 }
 
@@ -179,7 +161,7 @@ export default {
   bottom: 0;
   left: 0;
   z-index: -1;
-  width: 50%;
+  width: 80%;
   height: 100%;
   margin-right: auto;
   margin-left: auto;
@@ -207,9 +189,14 @@ export default {
 
   &--is-shown {
     pointer-events: none;
-    visibility: visible;
     opacity: 1;
     transform: translate3d(0, 0, 0) scaleX(1);
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .preview-img {
+    width: 50%;
   }
 }
 </style>

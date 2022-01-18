@@ -3,7 +3,7 @@
     <div class="header__bar">
       <div class="header__logo" @click.prevent="onClick">
         <NuxtLink
-          class="logo"
+          class="logo h4"
           to="/"
           @mouseover.native="linkHover()"
           @mouseleave.native="linkHoverOut()"
@@ -69,12 +69,12 @@ export default {
 
   &__logo {
     z-index: 999;
-    font-size: rem(40px);
-    color: theme-color(light);
   }
 
   .logo {
+    font-size: 30px;
     color: theme-color(light);
+    text-transform: uppercase;
   }
 }
 </style>

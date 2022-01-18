@@ -1,11 +1,8 @@
 <template>
   <div class="homepage-container">
     <div class="slider slider__wrapper">
-      <!-- Slider main container -->
       <div ref="swiper" class="swiper">
-        <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
-          <!-- Slides -->
           <div
             v-for="(item, key) in entry.sliderImages"
             :key="key"
@@ -46,6 +43,7 @@
 
 <script>
 import { Swiper, Navigation, Pagination, Mousewheel } from '~/plugins/swiper.js'
+
 export default {
   async fetch ({ store }) {
     await store.dispatch('entries/getEntry', {
@@ -61,7 +59,6 @@ export default {
   },
 
   mounted () {
-    // const Swiper = swiper.Swiper
     Swiper.use([Navigation, Pagination, Mousewheel])
 
     this.swiper = new Swiper(this.$refs.swiper, {
@@ -69,29 +66,27 @@ export default {
         nextEl: '.swiper__button--next',
         prevEl: '.swiper__button--prev'
       },
-      spaceBetween: 80,
-      mousewheelControl: true,
-      slidesPerView: 'auto',
-      allowTouchMove: false,
-      centeredSlides: true,
+      centeredSlides: true, // op hogere res
       loop: true,
       loopedSlides: 6,
-      speed: 1300,
-      mousewheel: true
+      mousewheel: true,
+      breakpoints: {
+        0: {
+          slidesPerView: 1.5,
+          spaceBetween: 30
+        },
+        572: {
+          slidesPerView: 1.5,
+          spaceBetween: 50
+        },
+        720: {
+          slidesPerView: 'auto',
+          spaceBetween: 80
+        }
+      }
     })
-
-    this.swiper.on('slideChange', (swiper) => {
-      this.activeSlideClass(swiper.activeIndex, swiper.slides)
-    })
-  },
-
-  methods: {
-    activeSlideClass (key, slides) {
-      const bodyClass = slides[key].dataset.bodyClass
-      document.body.removeAttribute('class')
-      document.body.classList.add(bodyClass)
-    }
   }
+
 }
 </script>
 
@@ -112,7 +107,6 @@ export default {
     align-items: center;
     width: 100%;
     height: 100%;
-    // border: solid 1px red;
   }
 
   &__title {
@@ -179,7 +173,7 @@ export default {
     bottom: 10%;
     left: 0;
     z-index: 1;
-    display: flex;
+    display: none;
     justify-content: space-around;
     width: 300px;
     margin-right: auto;
@@ -244,14 +238,20 @@ export default {
 }
 
 @include media-breakpoint-down(sm) {
-  // .cursor {
-  //   display: none;
-  // }
-
-  .swiper-slide {
+  .slider {
     &__title {
-      font-size: rem(40px);
+      font-size: rem(18px);
     }
+  }
+
+  .footer {
+    display: none;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .swiper-btn-wrapper {
+    display: flex;
   }
 }
 </style>

@@ -32,7 +32,7 @@
           <div class="col-md-6 offset-md-3">
             <img
               class="content-home__profile-img"
-              :src="entry.profileJairo.fields.file.url"
+              :src="`${entry.profileJairo.fields.file.url}?fit=fill&w=1500&h=2000&q=80&fm=jpg&fl=progressive`"
               alt=""
             >
           </div>
@@ -46,7 +46,19 @@
       </section>
       <section class="section-inset-b">
         <div class="content-home__slider">
-          <HomepageSlider />
+          <HomepageSlider>
+            <div
+              v-for="(item, key) in entry.officeSlider"
+              :key="key"
+              class="swiper-slide"
+            >
+              <div class="swiper-slide__img">
+                <div class="swiper-slide__inner">
+                  <img class="img" :src="`${item.fields.sliderImg.fields.file.url}?fit=fill&w=2000&h=1500&q=80&fm=jpg&fl=progressive`" alt="">
+                </div>
+              </div>
+            </div>
+          </HomepageSlider>
         </div>
       </section>
       <section class="section-inset-b">
@@ -82,7 +94,7 @@
             </h3>
           </div>
           <div class="col-md-8 offset-md-2 mt-5 d-flex justify-content-center">
-            <BaseButton is-light btn-name="Bekijk Fullscreen" />
+            <BaseButton is-light btn-name="Bekijk Fullscreen" :link-to="entry.organogramPdf.fields.file.url" />
           </div>
         </div>
       </section>
@@ -111,6 +123,10 @@ export default {
     entry () {
       return this.$store.state.entries.data.homePage.entry
     }
+  },
+
+  mounted () {
+    console.log(this.entry)
   }
 }
 </script>

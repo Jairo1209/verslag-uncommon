@@ -4,6 +4,7 @@ import plugins from './config/plugins.js'
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
+  server: false,
   // server: {
   //   port: 8000, // default: 3000
   //   host: '0.0.0.0' // default: localhost

@@ -69,25 +69,25 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-10 offset-sm-1 col-md-4 offset-md-0">
+          <div v-if="entry.videoOne" class="col-sm-10 offset-sm-1 col-md-4 offset-md-0">
             <video class="mt-5" controls>
-              <source src="~/assets/videos/video3.mp4" type="video/mp4">
+              <source :src="entry.videoOne.fields.file.url" type="video/mp4">
             </video>
             <span class="content-bpv__info-title h6" style="color: white;">Mobile</span>
           </div>
 
-          <div class="col-sm-10 offset-sm-1 col-md-7 offset-md-1">
+          <div v-if="entry.videoTwo" class="col-sm-10 offset-sm-1 col-md-7 offset-md-1">
             <div v-if="entry.infoBlockBodyThird" class="centered-box__body mt-5" v-html="$md.render(entry.infoBlockBodyThird)" />
             <video class="mt-5" controls>
-              <source src="~/assets/videos/video1.mp4" type="video/mp4">
+              <source :src="entry.videoTwo.fields.file.url" type="video/mp4">
             </video>
             <span class="content-bpv__info-title h6" style="color: white;">Desktop</span>
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-0">
+          <div v-if="entry.videoThree" class="col-sm-10 offset-sm-1 col-md-6 offset-md-0">
             <video class="mt-5" controls>
-              <source src="~/assets/videos/video2.mp4" type="video/mp4">
+              <source :src="entry.videoThree.fields.file.url" type="video/mp4">
             </video>
             <span class="content-bpv__info-title h6" style="color: white;">Product overzicht - pagina</span>
           </div>
@@ -121,7 +121,7 @@
             <span class="content-bpv__info-title h6">5 | Voorbereidingsfase</span>
           </div>
           <div class="col-md-5 mt-5 mb-5">
-            <BaseButton is-primary btn-name="Bekijk Fullscreen" />
+            <BaseButton is-primary btn-name="Bekijk Fullscreen" :link-to="entry.pdfOne.fields.file.url" />
           </div>
         </div>
         <Marquee
@@ -186,6 +186,7 @@
               <p class="content-bpv__body-text">
                 {{ entry.infoBlockColEight[key].fields.bodyText }}
               </p>
+              <BaseButton is-primary btn-name="Bekijk Fullscreen" :link-to="entry.pdfTwo.fields.file.url" />
             </div>
           </div>
           <div v-if="key % 3 === 0">
@@ -225,9 +226,8 @@ export default {
   },
 
   mounted () {
-    console.log(this.entry.infoBlockColEight)
+    console.log(this.entry)
   }
-
 }
 </script>
 

@@ -1,7 +1,8 @@
 <template>
   <a
     class="btn"
-    href="#"
+    :href="linkTo"
+    target="_blank"
     :class="{ 'btn__primary' : isPrimary, 'btn__light' : isLight }"
   >{{ btnName }}</a>
 </template>
@@ -20,6 +21,10 @@ export default {
     isLight: {
       type: Boolean,
       default: false
+    },
+    linkTo: {
+      type: String,
+      default: ''
     }
   }
 }
