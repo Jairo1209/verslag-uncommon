@@ -5,8 +5,8 @@
 export const state = () => ({
   menuIsOpen: false,
   transitionRemoved: true,
-  titleActive: false,
-  preloaderActive: false
+  titleActive: false
+  // preloaderActive: false
 })
 
 export const mutations = {

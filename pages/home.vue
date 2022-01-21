@@ -64,37 +64,51 @@
       <section class="section-inset-b">
         <div class="row">
           <div class="centered-box col-md-10 offset-md-1">
-            <h3 class="centered-box__title h4">
-              {{ entry.infoBlockTitleSecond }}
-            </h3>
-            <div class="centered-box__body" v-html="$md.render(entry.infoBlockBodySecond)" />
+            <animations-fade-in>
+              <h3 class="centered-box__title h4">
+                {{ entry.infoBlockTitleSecond }}
+              </h3>
+            </animations-fade-in>
+            <animations-fade-in>
+              <div class="centered-box__body" v-html="$md.render(entry.infoBlockBodySecond)" />
+            </animations-fade-in>
           </div>
         </div>
       </section>
       <section>
         <div class="row centered-box">
           <div class="col-md-8 offset-md-2">
-            <h3 class="centered-box__title h5">
-              {{ entry.videoTitle }}
-            </h3>
+            <animations-fade-in>
+              <h3 class="centered-box__title h5">
+                {{ entry.videoTitle }}
+              </h3>
+            </animations-fade-in>
           </div>
           <div class="col-md-10 offset-md-1">
-            <vimeo-player class="mt-5" src="488052319" :autoplay="true" />
+            <animations-fade-in>
+              <vimeo-player class="mt-5" src="488052319" :autoplay="true" />
+            </animations-fade-in>
           </div>
           <div class="col-md-10 offset-md-1 mt-5">
-            <div class="centered-box__body" v-html="$md.render(entry.videoBody)" />
+            <animations-fade-in>
+              <div class="centered-box__body" v-html="$md.render(entry.videoBody)" />
+            </animations-fade-in>
           </div>
         </div>
       </section>
       <section class="section-inset-b">
         <div class="row centered-box">
           <div class="col-md-8 offset-md-2">
-            <h3 class="centered-box__title h4">
-              {{ entry.organogramTitle }}
-            </h3>
+            <animations-fade-in>
+              <h3 class="centered-box__title h4">
+                {{ entry.organogramTitle }}
+              </h3>
+            </animations-fade-in>
           </div>
           <div class="col-md-8 offset-md-2 mt-5 d-flex justify-content-center">
-            <BaseButton is-light btn-name="Bekijk Fullscreen" :link-to="entry.organogramPdf.fields.file.url" />
+            <animations-fade-in>
+              <BaseButton is-light btn-name="Bekijk Fullscreen" :link-to="entry.organogramPdf.fields.file.url" />
+            </animations-fade-in>
           </div>
         </div>
       </section>
@@ -103,7 +117,11 @@
 </template>
 
 <script>
+import { PageTransition } from '~/mixins/pagetransition.js'
+
 export default {
+  mixins: [PageTransition],
+
   async fetch ({ store }) {
     await store.dispatch('entries/getEntry', {
       name: 'homePage',
@@ -123,10 +141,6 @@ export default {
     entry () {
       return this.$store.state.entries.data.homePage.entry
     }
-  },
-
-  mounted () {
-    console.log(this.entry)
   }
 }
 </script>

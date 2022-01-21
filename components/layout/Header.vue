@@ -5,8 +5,6 @@
         <NuxtLink
           class="logo h4"
           to="/"
-          @mouseover.native="linkHover()"
-          @mouseleave.native="linkHoverOut()"
         >
           {{ logoText }}
         </NuxtLink>
@@ -37,12 +35,6 @@ export default {
   methods: {
     onClick (e) {
       this.changeMenuColor = !this.changeMenuColor
-    },
-    linkHover () {
-      this.$store.commit('setCursorMedium', true)
-    },
-    linkHoverOut () {
-      this.$store.commit('setCursorMedium', false)
     }
   }
 }

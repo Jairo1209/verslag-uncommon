@@ -42,9 +42,11 @@
 </template>
 
 <script>
-import { Swiper, Navigation, Pagination, Mousewheel } from '~/plugins/swiper.js'
+import { PageTransition } from '~/mixins/pagetransition.js'
+import swiper from '~/plugins/swiper.js'
 
 export default {
+  mixins: [PageTransition],
   async fetch ({ store }) {
     await store.dispatch('entries/getEntry', {
       name: 'binnenkomstPagina',
@@ -52,14 +54,23 @@ export default {
     })
   },
 
+  head () {
+    return {
+      bodyAttrs: {
+        class: 'footer-hidden'
+      }
+    }
+  },
+
   computed: {
     entry () {
       return this.$store.state.entries.data.binnenkomstPagina.entry
     }
   },
-
   mounted () {
-    Swiper.use([Navigation, Pagination, Mousewheel])
+    const { Swiper, Pagination, Mousewheel, Navigation } = swiper
+
+    Swiper.use([Pagination, Mousewheel, Navigation])
 
     this.swiper = new Swiper(this.$refs.swiper, {
       navigation: {
@@ -68,8 +79,11 @@ export default {
       },
       centeredSlides: true, // op hogere res
       loop: true,
-      loopedSlides: 6,
-      mousewheel: true,
+      // loopedSlides: 6,
+      mousewheel: {
+        enabled: true,
+        sensitivity: 0.5
+      },
       breakpoints: {
         0: {
           slidesPerView: 1.5,

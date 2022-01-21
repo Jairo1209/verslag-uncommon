@@ -5,8 +5,6 @@
     class="hamburger"
     type="button"
     @click="toggleHamburger"
-    @mouseover="linkHover()"
-    @mouseleave="linkHoverOut()"
   >
     <span />
     <span />
@@ -26,12 +24,6 @@ export default {
   methods: {
     toggleHamburger () {
       this.$store.commit('setMenuState', !this.menuIsOpen)
-    },
-    linkHover () {
-      this.$store.commit('setCursorMedium', true)
-    },
-    linkHoverOut () {
-      this.$store.commit('setCursorMedium', false)
     }
   }
 }

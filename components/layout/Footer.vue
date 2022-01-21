@@ -47,9 +47,13 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .footer {
   background: theme-color(light);
+
+  .footer-hidden & {
+    display: none;
+  }
 
   &__links-wrapper {
     position: relative;

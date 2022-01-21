@@ -70,8 +70,9 @@
 </template>
 
 <script>
+import { PageTransition } from '~/mixins/pagetransition.js'
 export default {
-
+  mixins: [PageTransition],
   async fetch ({ store }) {
     await store.dispatch('entries/getEntry', {
       name: 'slotPage',

@@ -6,7 +6,7 @@
       <!-- <main> -->
       <Nuxt />
       <!-- </main> -->
-      <LayoutPreloader />
+      <LayoutPagetransition />
       <LayoutFooter />
     </section>
   </div>
@@ -14,21 +14,6 @@
 
 <script>
 export default {
-  // computed: {
-  //   transitionRemoved () {
-  //     return this.$store.state.transitionRemoved
-  //   }
-  // },
-  //
-  // watch: {
-  //   transitionRemoved (isRemoved) {
-  //     if (isRemoved) {
-  //       setTimeout(() => {
-  //         this.$refs.wrapper.removeChild(this.$refs.wrapper.querySelector('img'))
-  //       }, 500)
-  //     }
-  //   }
-  // }
 }
 </script>
 
