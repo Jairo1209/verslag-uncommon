@@ -30,39 +30,49 @@ export default {
     }
   },
 
+  beforeDestroy () {
+    this.titleAnimation()
+  },
+
   mounted () {
-    gsap.fromTo('.hero__title', {
-      opacity: 0,
-      y: 100
-    },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      delay: 2
-    })
-    const hero = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.hero',
-        start: 'top top',
-        end: '+=800',
-        scrub: true
-      }
-    }, 0)
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        // markers: true,
-        trigger: this.$el,
-        start: 'top 1',
-        end: 'bottom 1',
-        scrub: 1
-      }
-    }, 1)
-    timeline.fromTo('.hero__title', {
-      y: 0
-    }, {
-      y: -400
-    }, 0)
+    this.titleAnimation()
+  },
+
+  methods: {
+    titleAnimation () {
+      gsap.fromTo('.hero__title', {
+        opacity: 0,
+        y: 100
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 2
+      })
+      const hero = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'top top',
+          end: '+=800',
+          scrub: true
+        }
+      }, 0)
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          // markers: true,
+          trigger: this.$el,
+          start: 'top 1',
+          end: 'bottom 1',
+          scrub: 1
+        }
+      }, 1)
+      timeline.fromTo('.hero__title', {
+        y: 0
+      }, {
+        y: -400
+      }, 0)
+    }
   }
 }
 </script>

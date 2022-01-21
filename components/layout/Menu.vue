@@ -66,27 +66,33 @@ export default {
     }
   },
 
-  // 1x uitgevoerd als component wordt ingeladen
+  beforeDestroy () {
+    this.menuAnimation()
+  },
+
   mounted () {
-    this.animation = gsap.timeline({
-      paused: true
-    })
-    this.animation.fromTo('.menu__item',
-      {
-        opacity: 0,
-        y: -30
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1.2,
-        stagger: 0.2,
-        ease: 'power4.out'
-      }, 0.3)
+    this.menuAnimation()
   },
 
   // hier staan functies / methods in die je aan kunt roepen in je hele component
   methods: {
+    menuAnimation () {
+      this.animation = gsap.timeline({
+        paused: true
+      })
+      this.animation.fromTo('.menu__item',
+        {
+          opacity: 0,
+          y: -30
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          stagger: 0.2,
+          ease: 'power4.out'
+        }, 0.3)
+    },
     playAnimation () {
       this.animation.restart()
     },
