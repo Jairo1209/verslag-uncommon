@@ -106,10 +106,13 @@ export default {
   top: 0;
   left: 0;
   z-index: 1;
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 100vh;
+  overflow-y: scroll;
   visibility: hidden;
-  background: theme-color(dark);
+  background-color: theme-color(dark);
   opacity: 0;
 
   &.is-open {
@@ -118,17 +121,18 @@ export default {
   }
 
   &__nav {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 80vh;
   }
 
   &__list {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     width: 100%;
     height: 100%;
+    overflow-y: scroll;
   }
 
   &__item {
@@ -137,7 +141,7 @@ export default {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: calc(100% / 5);
+    height: calc(100% / 6);
     min-height: rem(100px);
     text-transform: lowercase;
 
