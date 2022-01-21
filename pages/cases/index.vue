@@ -1,6 +1,6 @@
 <template>
   <div class="cases container section-inset-y">
-    <section class="row section-inset-b">
+    <section class="row section-inset-b mt-5">
       <div class="col-md-6 offset-md-3">
         <h1 class="h3 cases__title">
           {{ entry.title }}
@@ -60,19 +60,20 @@ export default {
 <style lang="scss" scoped>
 .cases {
   &__title {
+    margin-top: 50px;
     color: theme-color(light);
     text-align: center;
   }
 
   &__item {
-    min-height: 600px;
+    min-height: 500px;
   }
 
   &__item-img {
     position: sticky;
     top: 80px;
     min-height: 300px;
-    margin-bottom: 100px;
+    margin-bottom: 10px;
 
     img {
       width: 100%;
@@ -87,6 +88,22 @@ export default {
 
     span {
       color: theme-color(light);
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .cases {
+    &__title {
+      margin-top: 0;
+    }
+
+    &__item {
+      min-height: 600px;
+    }
+
+    &__item-img {
+      margin-bottom: 100px;
     }
   }
 }
