@@ -2,26 +2,12 @@
   <div class="case-slider">
     <div class="swiper">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="~/assets/img/UNCOMMON_082.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img src="~/assets/img/UNCOMMON_082.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img src="~/assets/img/UNCOMMON_082.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img src="~/assets/img/UNCOMMON_082.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img src="~/assets/img/UNCOMMON_082.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img src="~/assets/img/UNCOMMON_082.jpg" alt="">
-        </div>
-        <div class="swiper-slide">
-          <img src="~/assets/img/UNCOMMON_082.jpg" alt="">
+        <div
+          v-for="(item, key) in sliderItems"
+          :key="key"
+          class="swiper-slide"
+        >
+          <img :src="`${item.fields.sliderImg.fields.file.url}?fit=fill&w=2000&h=1500&q=80&fm=jpg&fl=progressive`" alt="">
         </div>
       </div>
       <div class="case-slider__pagination" />
@@ -33,6 +19,14 @@ import swiper from '~/plugins/swiper.js'
 
 export default {
   name: 'CaseSlider',
+
+  props: {
+    sliderItems: {
+      type: Array,
+      default: undefined
+    }
+  },
+
   mounted () {
     const { Swiper, Pagination, Mousewheel, Navigation } = swiper
 
@@ -75,16 +69,22 @@ export default {
 
   &__pagination {
     bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
 
     &--bullet {
       height: 5px;
       padding: 0 30px;
-      background: red;
+      background-color: theme-color(light);
       border-radius: 0;
+      opacity: .3;
+    }
 
-      &.swiper-pagination-bullet-active & {
-        background: green;
-      }
+    .swiper-pagination-bullet-active {
+      background-color: theme-color(light);
+      opacity: 1;
     }
   }
 }

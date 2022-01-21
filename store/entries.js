@@ -24,6 +24,7 @@ export const state = () => ({
     homePage: { ...fields },
     slotPage: { ...fields },
     bpvPage: { ...fields },
+    casePage: { ...fields },
     menu: { ...fields },
     casesOverviewPage: { ...fields },
     bpvOverviewPage: { ...fields }

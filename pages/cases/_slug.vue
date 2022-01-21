@@ -1,58 +1,59 @@
 <template>
   <div class="project container section-inset-y">
-    <section class="row section-inset-y justify-content-center">
-      <div class="col-md-7 justify-content-center">
+    <section class="row section-inset-y mt-5">
+      <div class="col-sm-8 offset-sm-2 col-md-7 offset-md-3">
         <h3 class="h5 project__title line">
-          Dit is lorem ipsum tekst
-          om te vertellen over het project
+          {{ entry.introTitle }}
         </h3>
         <span />
         <p class="project__body-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-          occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          {{ entry.introBody }}
         </p>
       </div>
     </section>
     <section class="row section-inset-b">
-      <img ref="heroImg" class="project__hero-img" src="~/assets/img/UNCOMMON_082.jpg" alt="">
+      <img ref="heroImg" class="project__hero-img" :src="entry.heroImg.fields.file.url" alt="">
     </section>
     <section class="row section-inset-b">
       <div class="col-md-6">
         <div class="sticky">
           <span class="h6 project__title">
-            Dit is lorem ipsum tekst
-            om te vertellen over het project
+            {{ entry.midSectionTitle }}
           </span>
-          <div class="project__img">
-            <img src="~/assets/img/UNCOMMON_082.jpg" alt="">
+          <div class="project__img mt-5">
+            <img :src="entry.midSectionImgOne.fields.file.url" alt="">
           </div>
         </div>
       </div>
       <div class="col-md-6">
         <div class="none-sticky">
           <div class="project__img">
-            <img src="~/assets/img/UNCOMMON_082.jpg" alt="">
+            <img :src="entry.midSectionImgTwo.fields.file.url" alt="">
           </div>
           <p class="project__body-text section-inset-t">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+            {{ entry.midSectionBody }}
           </p>
         </div>
       </div>
     </section>
-
-    <CaseSlider />
+    <CaseSlider :slider-items="entry.caseSlider" />
+    <section class="row section-inset-b">
+      <div class="col-md-6 offset-md-3">
+        <p class="project__body-text section-inset-t text-center">
+          {{ entry.sliderText }}
+        </p>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
+import { PageTransition } from '~/mixins/pagetransition.js'
 export default {
+  mixins: [PageTransition],
   async fetch ({ store, route }) {
     await store.dispatch('entries/getSlug', {
-      content_type: 'bpvPage',
+      content_type: 'casePage',
       slug: route.params.slug
     })
   },
@@ -67,11 +68,12 @@ export default {
 
   computed: {
     entry () {
-      return this.$store.state.entries.data.bpvPage.slugEntry.fields
+      return this.$store.state.entries.data.casePage.slugEntry.fields
     }
   },
 
   mounted () {
+    console.log(this.entry)
     this.imgScale()
   },
 
@@ -85,7 +87,6 @@ export default {
           trigger: this.$refs.heroImg,
           start: 'top 50%',
           end: 'bottom 50%',
-          markers: true,
           scrub: 1
         },
         defaults: {
@@ -127,12 +128,22 @@ export default {
   }
 
   .none-sticky {
-    margin-top: 300px;
+    margin-top: 50px;
   }
 
   &__body-text {
     font-size: 17px;
     color: #666;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+@include media-breakpoint-up(md) {
+  .none-sticky {
+    margin-top: 300px;
   }
 }
 </style>
