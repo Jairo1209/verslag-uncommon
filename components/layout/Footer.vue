@@ -1,41 +1,43 @@
 <template>
-  <footer class="footer container section-inset-y">
-    <div class="footer__row row">
-      <div class="col-md-6 offset-md-3 d-flex justify-content-center">
-        <LottieLogo />
-      </div>
-    </div>
-    <div class="footer__row row">
-      <div class="col-md-3">
-        <div class="footer__links-wrapper">
-          <n-link to="/home" class="footer__links h6">
-            home
-          </n-link>
-          <div class="bg-fill" />
+  <footer class="footer section-inset-y">
+    <div class="container">
+      <div class="footer__row row">
+        <div class="col-md-6 offset-md-3 d-flex justify-content-center">
+          <LottieLogo />
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="footer__links-wrapper">
-          <n-link to="/bpv/uncommon-apparel" class="footer__links h6">
-            uncommon apparel
-          </n-link>
-          <div class="bg-fill" />
+      <div class="footer__row row">
+        <div class="col-md-3">
+          <div class="footer__links-wrapper">
+            <n-link to="/home" class="footer__links h6">
+              home
+            </n-link>
+            <div class="bg-fill" />
+          </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="footer__links-wrapper">
-          <n-link to="/bpv/fitlab" class="footer__links h6">
-            fitlab
-          </n-link>
-          <div class="bg-fill" />
+        <div class="col-md-3">
+          <div class="footer__links-wrapper">
+            <n-link to="/bpv/uncommon-apparel" class="footer__links h6">
+              uncommon apparel
+            </n-link>
+            <div class="bg-fill" />
+          </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="footer__links-wrapper">
-          <n-link to="/slot" class="footer__links h6">
-            slot
-          </n-link>
-          <div class="bg-fill" />
+        <div class="col-md-3">
+          <div class="footer__links-wrapper">
+            <n-link to="/bpv/fitlab" class="footer__links h6">
+              fitlab
+            </n-link>
+            <div class="bg-fill" />
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="footer__links-wrapper">
+            <n-link to="/slot" class="footer__links h6">
+              slot
+            </n-link>
+            <div class="bg-fill" />
+          </div>
         </div>
       </div>
     </div>

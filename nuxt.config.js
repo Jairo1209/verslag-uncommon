@@ -67,7 +67,9 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     //
-    '@nuxtjs/markdownit'
+    '@nuxtjs/markdownit',
+    ['nuxt-rfg-icon', { static: true }],
+    '@nuxtjs/manifest'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

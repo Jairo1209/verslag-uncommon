@@ -12,7 +12,7 @@
       </div>
     </section>
     <section class="row section-inset-b">
-      <img ref="heroImg" class="project__hero-img" :src="entry.heroImg.fields.file.url" alt="">
+      <img ref="heroImg" class="project__hero-img" :src="`${entry.heroImg.fields.file.url}?fit=fill&w=2000&h=1500&q=80&fm=jpg&fl=progressive`" alt="">
     </section>
     <section class="row section-inset-b">
       <div class="col-md-6">
@@ -21,14 +21,14 @@
             {{ entry.midSectionTitle }}
           </span>
           <div class="project__img mt-5">
-            <img :src="entry.midSectionImgOne.fields.file.url" alt="">
+            <img :src="`${entry.midSectionImgOne.fields.file.url}?fit=fill&w=2000&h=1500&q=80&fm=jpg&fl=progressive`" alt="">
           </div>
         </div>
       </div>
       <div class="col-md-6">
         <div class="none-sticky">
           <div class="project__img">
-            <img :src="entry.midSectionImgTwo.fields.file.url" alt="">
+            <img :src="`${entry.midSectionImgTwo.fields.file.url}?fit=fill&w=2000&h=1500&q=80&fm=jpg&fl=progressive`" alt="">
           </div>
           <p class="project__body-text section-inset-t">
             {{ entry.midSectionBody }}

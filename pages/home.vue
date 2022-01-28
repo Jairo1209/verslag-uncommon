@@ -5,7 +5,7 @@
       :title-name="entry.title"
     />
     <div class="content-home container">
-      <div class="content-home__txt-block">
+      <div class="col-md-6 offset-md-3">
         <ul class="content-home__list">
           <li v-for="item, key in entry.introductioBlock" :key="key" class="content-home__list-item">
             {{ item.fields.IntroductionField }}
@@ -152,24 +152,21 @@ export default {
   margin-top: rem(50px);
   color: theme-color(light);
 
-  &__txt-block {
-    position: absolute;
-    top: rem(-150px);
-    left: 0;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: rem(400px);
-    height: rem(225px);
-    padding-left: 5%;
-    background-color: theme-color(light);
-  }
-
   &__list {
-    margin: 0;
-    color: theme-color(dark);
+    padding: 20px;
+    color: theme-color(light);
+    text-align: center;
     list-style-type: none;
+    border: solid 2px theme-color(light);
+    box-shadow: inset 0 0 0 theme-color(light);
+    transition: box-shadow .5s, color .25s;
+
+    @media (hover: hover) {
+      &:hover {
+        color: theme-color(dark);
+        box-shadow: inset 0 200px 0 theme-color(light);
+      }
+    }
   }
 
   &__profile {
@@ -203,10 +200,6 @@ export default {
 @include media-breakpoint-up(md) {
   .content-home {
     padding-top: inherit;
-
-    &__txt-block {
-      left: 5vw;
-    }
   }
 }
 </style>
